@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/10/28 16:25:45 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/10/28 18:29:30 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,15 @@ int	main(int ac, char **av)
 			if (line[0] != '\0')
 				ft_liste_push(line, &list);
 		}
-	if (line[0] == '\0')
-		free(line);
+		if (line[0] == '\0')
+			free(line);
+		if (parse(&list) == FALSE)
+		{
+			ft_putendl("FALSE");
+			print_liste(list);
+			return (FALSE);
+		}
+		ft_putendl("TRUE");
+		print_liste(list);
 	}
-	if (parse(&list) == FALSE)
-		return (FALSE);
-	print_liste(list);
 }

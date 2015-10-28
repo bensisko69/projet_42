@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/10/28 16:41:59 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/10/28 18:33:40 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,64 @@ int		parse_nbr(t_liste **liste)
 	return (FALSE);
 }
 
+int		parse_name_room(t_liste **liste)
+{
+	int	i;
+
+	i = 0;
+	if((*liste)->str[0] == 'L' || (*liste)->str[0] == '#' )
+		return (FALSE);
+	while (ft_isalnum((int)(*liste)->str[i]) == 1 && (*liste)->str[i])
+			i++;
+	i++;
+	while (ft_isdigit((int)(*liste)->str[i]) == 1 && (*liste)->str[i])
+		i++;
+	if ((*liste)->str[i] == ' ' && (*liste)->str[i])
+		i++;
+	while (ft_isdigit((int)(*liste)->str[i]) == 1 && (*liste)->str[i])
+		i++;
+	if ((*liste)->str[i] == '\0')
+	{
+		(*liste)->type = 2;
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
+int		parse_cmd(t_liste **liste)
+{
+	if ((*liste)->str[0] == '#' && (*liste)->str[1] == '#')
+	{
+		if (ft_strcmp((*liste)->str, "##start") == TRUE)
+		{
+			(*liste)->type = 3;
+			(*liste) = (*liste)->next;
+			if (parse_name_room(liste) == FALSE)
+				return (FALSE);
+			(*liste)->type = 3;
+		}
+		else if(ft_strcmp((*liste)->str, "##end") == TRUE)
+		{
+			(*liste)->type = 4;
+			(*liste) = (*liste)->next;
+			if (parse_name_room(liste) == FALSE)
+				return (FALSE);
+			(*liste)->type = 4;
+		}
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
+
 int		parse_room(t_liste **liste)
 {
 	while (parse_com(liste) == TRUE)
 		(*liste) = (*liste)->next;
-	return (TRUE);
+	if (parse_cmd(liste) == TRUE)
+		(*liste) = (*liste)->next;
+	// while(parse_word(liste) == TRUE)
+	return (FALSE);
 }
 
 int		parse_exp(t_liste **liste)
@@ -64,7 +117,7 @@ int		parse_exp(t_liste **liste)
 		if (parse_room(liste) == TRUE)
 			return (TRUE);
 	}
-	return (TRUE);
+	return (FALSE);
 }
 
 int		parse(t_liste **liste)
