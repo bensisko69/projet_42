@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/10/29 14:21:20 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/10/29 15:22:54 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define TRUE 0
 # define OPEN_FALED "Open faled"
 # define PARSE_ERROR "Parse error"
+# define NAME_ERROR "Two name of room"
 # include <stdlib.h>
 # include <fcntl.h>
 # include "libft/includes/libft.h"
@@ -60,5 +61,7 @@ int						parse_cmd(t_liste **liste);
 int						parse_noeud(t_liste **liste);
 
 int						lexer(t_liste **liste);
+int						check_name_room(t_liste **liste);
+int						cmp(t_liste *list);
 
 #endif

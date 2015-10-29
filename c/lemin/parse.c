@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/10/29 14:05:57 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/10/29 15:14:13 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		parse_nbr(t_liste **liste)
 	if ((*liste)->str[i] == '\0')
 	{
 		(*liste)->type = 1;
+		(*liste)->nbr_ants = ft_atoi((*liste)->str);
 		(*liste) = (*liste)->next;
 		return (TRUE);
 	}
