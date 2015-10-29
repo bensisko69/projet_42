@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/10/28 18:29:30 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/10/29 14:21:32 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char		*delete_tab_or_spaces(char *str)
 	return (str2);
 }
 
-int	main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_liste	*list;
 	char	*line;
@@ -44,7 +44,7 @@ int	main(int ac, char **av)
 	{
 		if ((fd = open(av[1], O_RDONLY)) < 0)
 		{
-			ft_error(1);
+			ft_error(1, "");
 			return (FALSE);
 		}
 		while (get_next_line(fd, &line) > 0)
@@ -58,11 +58,11 @@ int	main(int ac, char **av)
 			free(line);
 		if (parse(&list) == FALSE)
 		{
-			ft_putendl("FALSE");
-			print_liste(list);
+			ft_error(2, list->previous->str);
 			return (FALSE);
 		}
-		ft_putendl("TRUE");
+		if (lexer(&list) == FALSE)
+			return (FALSE);
 		print_liste(list);
 	}
 }

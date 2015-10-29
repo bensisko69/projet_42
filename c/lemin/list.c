@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 15:54:31 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/10/28 16:30:32 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/10/29 13:59:25 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,11 @@ void		print_liste(t_liste *list)
 	while (list->next->start != 1)
 	{
 		ft_putnbr(list->type);
-		// ft_putnbr(list->start);
 		ft_putstr(list->str);
 		write(1, "\n", 1);
 		list = list->next;
 	}
 	ft_putnbr(list->type);
-	// ft_putnbr(list->start);
 	ft_putstr(list->str);
 	write(1, "\n", 1);
 }
