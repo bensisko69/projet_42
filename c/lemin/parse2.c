@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 13:46:24 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/10/30 12:30:33 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/10/30 17:13:12 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		parse_noeud(t_liste **liste)
 		i++;
 	if ((*liste)->str[i] != ' ' && (*liste)->str[i] && (*liste)->str[i] == '-')
 		i++;
-	while (ft_isdigit((int)(*liste)->str[i]) == 1 && (*liste)->str[i])
+	while (ft_isalnum((int)(*liste)->str[i]) == 1 && (*liste)->str[i])
 		i++;
 	if ((*liste)->str[i] == '\0' && (*liste)->type != 1)
 	{
