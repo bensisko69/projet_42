@@ -6,45 +6,58 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 14:17:13 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/10/29 15:38:36 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/10/30 16:28:33 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
+static int	len(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != ' ')
+		i++;
+	return (i);
+}
+
 int		cmp(t_liste *liste)
 {
 	char	*str;
 	t_liste	*tmp;
+	int		size;
+	int		ret;
 
-	while (liste->type == 2 && liste->type == 3 && liste->type == 4)
+	ret = 0;
+	size = 0;
+	tmp = liste;
+	while (liste->next->type != 6)
 	{
-		ft_putendl(liste->str);
-		ft_putnbr(liste->type);
-		if (liste->type == 5)
-			liste = liste->next;
 		str = liste->str;
 		tmp = liste->next;
-		while (ft_strcmp(str, tmp->str) == 0)
+		if (tmp->type == 4 || tmp->type == 3)
 			tmp = tmp->next;
+		while ((ret = ft_strncmp(str, tmp->str, len(str))) != 0 && tmp->type != 6)
+			tmp = tmp->next;
+		if (ret == 0)
+		{
+			ft_error(3 , str);
+			return (FALSE);
+		}
 		liste = liste->next;
 	}
-	if (tmp->type == 6)
-		return (TRUE);
-	return (FALSE);
+	return (TRUE);
 }
 
 int		check_name_room(t_liste **liste)
 {
-	while((*liste)->type != 2 && (*liste)->type != 3 && (*liste)->type != 4)
+	while((*liste)->type != 2)
 		(*liste) = (*liste)->next;
 	if ((*liste)->type == 3 || (*liste)->type == 4)
 		(*liste) = (*liste)->next;
 	if (cmp(*liste) == FALSE)
-	{
-		ft_error(3 , (*liste)->str);
 		return (FALSE);
-	}
 	return (TRUE);
 }
 
