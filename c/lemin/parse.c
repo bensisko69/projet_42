@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/10/29 15:14:13 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/02 18:53:12 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ int		parse(t_liste **liste)
 {
 	while ((*liste)->start != 1)
 		(*liste) = (*liste)->next;
-	parse_exp(liste);
-	if ((*liste)->type == 0)
+	if (parse_exp(liste) ==  FALSE)
 		return (FALSE);
 	return (TRUE);
 }

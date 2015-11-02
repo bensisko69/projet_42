@@ -6,13 +6,13 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 15:28:19 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/10/29 15:23:22 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/02 18:19:08 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void	puts(char *error, char *line)
+void	puts_(char *error, char *line)
 {
 	ft_putstr_fd(error, 2);
 	ft_putstr_fd(" at line ", 2);
@@ -24,7 +24,7 @@ void	ft_error(int nbr, char *str)
 	if (nbr == 1)
 		ft_putendl_fd(OPEN_FALED, 2);
 	else if (nbr == 2)
-		puts(PARSE_ERROR, str);
+		puts_(PARSE_ERROR, str);
 	else if (nbr == 3)
-		puts(NAME_ERROR, str);
+		puts_(NAME_ERROR, str);
 }

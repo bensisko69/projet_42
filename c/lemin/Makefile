@@ -33,7 +33,7 @@ FLAGS = -Wall -Wextra -Werror -g3 -I$(INCLUDE_DIR) -I$(LIB_DIR)
 all: libft/libft.a $(NAME)
 
 $(NAME): $(OBJ)
-	gcc -o $(NAME) $(OBJ) -L$(LIBFT) -lft
+	gcc -o $(NAME) $(OBJ) -L$(LIBFT) -lft && echo "OK"
 
 libft/libft.a:
 	make -C libft
