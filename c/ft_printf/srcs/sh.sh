@@ -1,0 +1,2 @@
+gcc -g3 -Wall -Wextra -Werror -Wno-format libftprintf.a ft_printf.c ft_printf2.c print_c.c print_p100.c print_p100_0.c print_c_0.c print_s.c print_s_0.c print_d.c print_d_0.c ft_putnbr_base.c print_x.c print_x_0.c print_o.c print_o_0.c print_X_MAJ.c print_X_MAJ_0.c print_d_l.c ft_putnbr_base_long.c print_d_l_0.c print_p.c print_o_l.c print_o_l_0.c print_u_0.c print_u.c print_u_l.c print_u_l_0.c print_es.c print_d_es.c print_p_0.c print_c_maj.c print_c_maj_0.c print_pos.c print_d_ps.c print_d_ps_0.c print_d_es_0.c print_neg.c print_d_ng.c print_pos2.c
+./a.out

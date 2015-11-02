@@ -1,0 +1,10 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block body %}
+	{% if user.is_authenticated %}
+		<h1 id="h1" >Bienvenue {{ user.username }}</h1>
+	{% else %}
+		<p class="p" >Bienvenue cliquez <a class="p" href="{% url 'app_ldap:login_view' %}">ici </a> pour vous log</p>
+	{% endif %}
+{% endblock body %}

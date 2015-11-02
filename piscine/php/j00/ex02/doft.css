@@ -1,0 +1,244 @@
+body
+{
+	background: #474747;
+	width: 1570;
+	height: 990;
+
+}
+
+/*
+header
+*/
+
+#header
+{
+	position: absolute;
+	background: #8e9092;
+	height: 180px;
+	width: 1560px;
+	border-radius: 10px;
+	box-shadow: 10px 10px 10px black;
+	left: 50px;
+}
+
+#img
+{
+	position: absolute;
+	width: 600px;
+	top: 20px;
+	left: 30px;
+}
+
+#loupe
+{
+	position: absolute;
+	width: 370px;
+	left: 1150px;
+	top: 10px;
+}
+
+#reload
+{
+	width: 30px;
+	position: absolute;
+	left: 1525px;
+	top: 8px;
+}
+
+#close
+{
+	width: 30px;
+	position: absolute;
+	left: 1525px;
+	top: 145px;
+}
+
+/*
+barre gauche
+*/
+#left
+{
+	margin-top: 15px;
+	margin-left: 80px;
+	margin-top: 199px;
+	background: #8e9092;
+	height: 450px;
+	width: 170px;
+	border-radius: 10px;
+	box-shadow: 10px 10px 10px black;;
+}
+
+#arrow
+{
+	position: absolute;
+	width: 80px;
+	left: 135px;
+	top: 220px;
+}
+
+#main
+{
+	position: absolute;
+	width: 80px;
+	left: 135px;
+	top: 300px;
+}
+
+#oeil
+{
+	position: absolute;
+	width: 80px;
+	left: 135px;
+	top: 390px;
+	border: 5px solid red;
+	border-radius: 6px;
+}
+
+#outil
+{
+	position: absolute;
+	width: 80px;
+	left: 135px;
+	top: 490px;
+}
+
+#chat
+{
+	position: absolute;
+	width: 80px;
+	left: 135px;
+	top: 580px;
+}
+
+ /*
+Cluster
+ */
+#cluster
+{
+	background: #8e9092;
+	height: 605px;
+	width: 1050px;
+	border-radius: 10px;
+	box-shadow: 10px 10px 10px black;;
+	position: absolute;
+	left: 300px;
+	top: 215px;
+}
+
+#img_cluster
+{
+	position: absolute;
+	top: 13px;
+	left: 13px;
+}
+
+/*
+Barre droite
+*/
+#right
+{
+	background: #8e9092;
+	height: 450px;
+	width: 170px;
+	border-radius: 10px;
+	box-shadow: 10px 10px 10px black;
+	position: absolute;
+	left: 1400px;
+	top: 215px;
+}
+
+#img_book
+{
+	width: 80px;
+	position: absolute;
+	top: 10px;
+	left: 45px;
+}
+
+#img_towel
+{
+	width: 80px;
+	position: absolute;
+	top: 130px;
+	left: 45px;
+}
+
+#img_brick
+{
+	width: 150px;
+	height: 71px;
+	background-image: url(resources/brick.jpg);
+	position: absolute;
+	top: 200px;
+	left: 9px;
+}
+
+/*
+windows grenn
+*/
+
+#windows
+{
+	background: #89F290;
+	height: 220px;
+	width: 600px;
+	border-radius: 10px;
+	box-shadow: 10px 10px 10px black;
+	position: absolute;
+	top: 750px;
+}
+
+#point
+{
+	font-size: 20px;
+	margin-top: 55px;
+	margin-left: 120px;
+}
+
+p3
+{
+	font-size: 20px;
+	text-shadow: 6px 4px 7px red;
+	margin-top: 55px;
+}
+
+p
+{
+	font-size: 20px;
+	position: absolute;
+	left: 15px;
+	font-family: arial;
+}
+
+p1
+{
+	font-family: arial;
+	font-size: 35px;
+}
+
+p2
+{
+	font-size: 20px;
+	position: absolute;
+	left: 15px;
+	top: 85px;
+}
+
+#champ
+{
+	position: absolute;
+	left: 15px;
+	top: 110px;
+	width: 430px;
+}
+
+#button
+{
+	position: absolute;
+	left: 450px;
+	top: 110px;
+	width: 125px;
+	font-size: 18px;
+	font-family: arial;
+
+}

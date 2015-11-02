@@ -1,0 +1,40 @@
+Faire les conversions  :
+
+%s : string putstr() 									ok et c.0 ok 
+%S :
+%p : pointeur putnbr_base()								ok et p.0 ok 
+%d : int putnbr_base() 									ok et d.0 ok 
+%D : long int 											ok et D.0 ok 
+%i : int putnbr_base() 									ok et i.0 ok
+%o : int en octal putnbr_base() 						ok et o.0 ok 
+%O : long int											ok et O.0 ok 			
+%u : int en non signe putnbr_base_unsigned()			ok et u.0 ok  
+%U : long unsigned int									ok et U.0 ok  
+%x : entier exa minuscule putnbr_base() 				a voir si nombre neg marche pas???			
+%X : entier exa majuscule putnbr_base_maj() 			a voir si nombre neg marche pas???	
+%c : char putchar() 									ok et c.0 ok 
+%C : 
+%% : affiche le caractere % 							ok et %.0 ok 
+
+faire les flags :
+
+# :
+0 : pour toutes les conversion 0 est affiche plutot que des espaces, pour %d, %i, %o, %u, %x, %X  si une 		precision est fournie l attribut 0 est ignoré.
+- : l affichage est justifie a gauche et non a droite par defaut
++ : les nombre signes seront toujours affiche avec un signe + ou - avant
+espace : Les nombres positif sont precede d un esapce et les nombre negatifs d un signe -
+
+faire les fags : 
+
+hh :
+h : La valeur est affiche comme un short ou un unsigned short
+l : Pour %d, %i, %o, &u l argument est un longue int ou unsigned long int et pas un int
+ll : 
+j :
+z : indique que la conversion suivant ( %d, %i, %o, %u, %X, %X ) correspond a un size_t
+
+faire :
+la precision et la taille minimum du champ.
+
+{  0}{6}
+{  0}{5}%

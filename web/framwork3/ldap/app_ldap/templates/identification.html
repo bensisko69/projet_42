@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block body %}
+<div>
+	<form method="POST" action="{% url 'app_ldap:login_view' %}">
+	{% csrf_token %}
+	<fieldset id="fieldset">
+	<legend id="legend" >IDENTIFICATION</legend>
+		{{form.as_p}}
+		<input id="ok" type="submit" value="ENVOYER" name="ok">
+	</fieldset>
+	</form>
+</div>
+
+{% endblock %}

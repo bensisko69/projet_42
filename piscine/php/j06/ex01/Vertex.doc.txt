@@ -1,0 +1,13 @@
+<- Vertex ----------------------------------------------------------------------
+An instance can be constructed from a value of: 
+red, green, blue as 
+new color (array ('red' => 255, 'green' => 255, 'blue' => 255)); 
+
+Attention values: 
+private $ _x = 0; 
+private $ _y = 0; 
+private $ _z = 0; 
+
+are mandatory, do not send cause undefined behavior.
+
+---------------------------------------------------------------------- Vertex ->

@@ -1,0 +1,49 @@
+body
+{
+    background: black;
+    background-image: url(http://www.docbuzz.fr/wp-content/uploads/2012/03/raitos-f7cad04a34.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1250px;
+}
+
+ul
+{
+    padding: 5px;
+    margin: 5px;
+}
+
+a
+{
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+}
+
+h1
+{
+    color: red;
+    text-align: center;
+    text-decoration: overline;
+    font-size: 55px;
+
+
+}
+
+li
+{
+    float: left;
+    border-right : 1px solid #fff;
+    border-left: 1px solid red;
+    border-radius: 10px;
+    text-align: center;
+    border-width: 3px;
+    margin-left: 15%;
+    margin-top: 2.2%;
+}
+
+a:hover
+{
+    color: black;
+    background: red;
+}

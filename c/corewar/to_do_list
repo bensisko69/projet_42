@@ -1,0 +1,23 @@
+
+Gestion d erreur fait:
+						- Double Name ou comment
+						- deux nom de label identique
+						- apres un label au moins une inst
+						- PROG_NAME obligatoireCOMMENT obligatoire
+						- t_reg_obligatoirement inferieur eu REG_NUMBER
+						- OPEN faild
+						- aucun nom de fichier.s
+						- suppresion de tout les espaces ou tab avant 
+						  l insertion ds la liste
+Norme fait
+			- op.h
+			- tout les fichier du dossier parser
+
+Gestion d'erreur a faire:
+						- affichage d'erreur si le nom de l instruction n existe 
+						  pas ds le tableau
+						- gestion du bon nombre d argument
+						- gestion de la conformiter des arguments
+
+fonction a finir
+					check_inst.c

@@ -1,0 +1,81 @@
+
+/*
+**base.html
+*/
+#body
+{
+	background: black;
+}
+
+#mega
+{
+	color: red;
+}
+
+h1
+{
+	color: black;
+	text-align: center;
+	font-size: 65px;
+	padding-top: 15px;
+	text-decoration: underline;
+}
+
+#center
+{
+	height: 1000px;
+	width: 80%;
+	margin: auto;
+	background: white;
+	border-radius: 55px;
+	background-image: url(../static/feu.png);
+	background-position:right bottom;
+}
+
+.p
+{
+	font-size: 45px;
+	text-decoration: none;
+	text-align: center;
+	margin-top: 350px;
+}
+
+#h1
+{
+	color: black;
+	text-align: center;
+	font-size: 45px;
+	padding-top: 60px;
+	padding-right: 85px;
+	text-decoration: underline;
+}
+
+#logout
+{
+	height: 10%;
+	margin-left: 30px;
+	margin-top: 30px;
+	float: left;
+}
+
+#fire
+{
+	height: 250px;
+
+}
+
+
+/*
+**index.html
+*/
+
+#legend {font-size: 25px;}
+
+#fieldset 
+{
+	border-radius: 25px;
+	height: 220px;
+	width: 20%;
+	margin: auto;
+	text-shadow:#FFFFFF 1px 2px;
+}

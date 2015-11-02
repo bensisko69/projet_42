@@ -1,0 +1,7 @@
+	time_t	now;
+	struct tm * ptm;
+	time(&now);
+	ptm = gmtime ( &now );
+	_vector[0] = "--------- Date and times ---------";
+	_vector[1] = "Date and time: " + changeChar((ptm->tm_hour + 2)%24) + ':'+ changeChar(ptm->tm_min) + ':' +changeChar(ptm->tm_sec);
+	return _vector;

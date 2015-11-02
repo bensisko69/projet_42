@@ -1,0 +1,6 @@
+#fichier vide  =  segfault
+.name "stayin' alive"
+.comment "Ha, Ha, Ha, stayiiiiin' aliiiiiiiiiive"
+liv_e:
+live %17 				;lolffffff
+lfork %:liv_e			   ;

@@ -1,0 +1,53 @@
+<html>
+	<style>
+	body
+	{
+		background: url(http://www.getanimewallpaper.com/wp-content/uploads/2013/10/Pokemon-5.jpg);
+		background-repeat:no-repeat;
+		background-position: center;
+		border: 50px solid black;
+	}
+	#post
+	{
+		position: absolute;
+		top: 40%;
+		left: 45%;
+		height: 180px;
+		width: 280px;
+		border: 2px solid red;
+		border-radius: 30px;
+	}
+	#top
+	{
+		margin-top: 10px;
+		margin-right: 15px;
+		width: 150px;
+	}
+	#bot
+	{
+		width: 150px;
+	}
+	p
+	{
+		font-size: 25px;
+		color: red;
+	}
+	#submit
+	{
+		width: 60px;
+		font-size: 200px;
+	}
+	</style>
+	<body>
+	<title>Identification</title>
+		<center>
+				<form method="POST" action="create.php">
+					<div id="post">
+						<p><input id="top" type="text" name="login" value=""> login </p>
+						<p><input id="bot" type="password" name="passwd" value=""> passwd </p>
+						<input id="submit" type="submit" name="submit" value="OK" />
+					</div>
+				</form>
+		</center>
+	</body>
+</html>
