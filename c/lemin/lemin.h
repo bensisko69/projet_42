@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/10/30 16:34:05 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/10/29 15:22:54 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** 4 type end
 ** 5 type COMMENT
 ** 6 type TUBE
-** start
+	start
 ** 1 = 1er ellem
 ** 0 = ellem suivant
 */

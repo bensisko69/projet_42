@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 13:46:24 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/10/30 17:13:12 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/10/29 14:03:25 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		parse_noeud(t_liste **liste)
 		i++;
 	if ((*liste)->str[i] != ' ' && (*liste)->str[i] && (*liste)->str[i] == '-')
 		i++;
-	while (ft_isalnum((int)(*liste)->str[i]) == 1 && (*liste)->str[i])
+	while (ft_isdigit((int)(*liste)->str[i]) == 1 && (*liste)->str[i])
 		i++;
 	if ((*liste)->str[i] == '\0' && (*liste)->type != 1)
 	{
@@ -47,6 +47,7 @@ int		parse_cmd(t_liste **liste)
 				(*liste) = (*liste)->next;
 			if (parse_name_room(liste) == FALSE)
 				return (FALSE);
+			(*liste)->type = 3;
 		}
 		else if (ft_strcmp((*liste)->str, "##end") == TRUE)
 		{
@@ -56,6 +57,7 @@ int		parse_cmd(t_liste **liste)
 				(*liste) = (*liste)->next;
 			if (parse_name_room(liste) == FALSE)
 				return (FALSE);
+			(*liste)->type = 4;
 		}
 		return (TRUE);
 	}
