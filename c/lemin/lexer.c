@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 14:17:13 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/04 14:18:03 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/05 18:13:11 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@ int		cmp(t_liste *liste)
 {
 	char	*str;
 	t_liste	*tmp;
-	// int		size;
 	int		r;
 
 	r = 0;
-	// size = 0;
 	tmp = liste;
 	while (liste->next->type != 6)
 	{
@@ -39,12 +37,15 @@ int		cmp(t_liste *liste)
 		if (tmp->type == 4 || tmp->type == 3)
 			tmp = tmp->next;
 		while ((r = ft_strncmp(str, tmp->str, len(str))) != 0 && tmp->type != 6)
+		{
+			ft_putendl(tmp->str);
 			tmp = tmp->next;
-		// if (r == 0)
-		// {
-		//     ft_error(3, str);
-		//     return (FALSE);
-		// }
+		}
+		if (r == 0)
+		{
+			ft_error(3, str);
+			return (FALSE);
+		}
 		liste = liste->next;
 	}
 	return (TRUE);

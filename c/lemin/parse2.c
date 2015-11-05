@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 13:46:24 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/05 17:52:11 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/05 18:02:34 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int		parse_cmd(t_liste **liste)
 			if (parse_name_room(liste) == FALSE)
 				return (FALSE);
 			(*liste) = (*liste)->next;
-				ft_putendl((*liste)->str);
 			return (TRUE);
 		}
 	}
