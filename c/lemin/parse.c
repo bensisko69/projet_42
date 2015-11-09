@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/05 17:52:19 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/09 18:57:14 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,34 +36,12 @@ int		parse_nbr(t_liste **liste)
 	return (FALSE);
 }
 
-int		check_cmd(t_liste **liste)
+int		parse_tube(t_liste **liste)
 {
-	int	start;
-	int	end;
-
-	start = 0;
-	end = 0;
-	t_liste *tmp;
-
-	tmp = (*liste);
-
-	while (tmp->start != 1)
-		tmp = tmp->next;
-	if (tmp->type == 3)
-		start++;
-	else if (tmp->type == 4)
-		end++;
-	tmp = tmp->next;
-	while (tmp->start != 1)
-	{
-		if (tmp->type == 3)
-			start++;
-		if (tmp->type == 4)
-			end++;
-		tmp = tmp->next;
-	}
-	if (start != 1 || end != 1)
-		return (FALSE);
+	while (parse_com(liste) == TRUE)
+		(*liste) = (*liste)->next;
+	while (parse_noeud(liste) == TRUE)
+		(*liste) = (*liste)->next;
 	return (TRUE);
 }
 
@@ -78,24 +56,17 @@ int		parse_room(t_liste **liste)
 		(*liste) = (*liste)->next;
 		while (parse_com(liste) == TRUE)
 			(*liste) = (*liste)->next;
-		if (parse_cmd(liste) == FALSE)
-			return (FALSE);
-		if (parse_cmd(liste) == FALSE)
-			return (FALSE);
+		while ((ret = parse_cmd(liste)) != 2)
+		{
+			(*liste) = (*liste)->next;
+			while (parse_com(liste) == TRUE)
+				(*liste) = (*liste)->next;
+		}
 	}
-	if (check_cmd(liste) == FALSE)
-		return (FALSE);
+	ft_putendl("lol");
 	return (TRUE);
 }
 
-int		parse_tube(t_liste **liste)
-{
-	while (parse_com(liste) == TRUE)
-		(*liste) = (*liste)->next;
-	while (parse_noeud(liste) == TRUE)
-		(*liste) = (*liste)->next;
-	return (TRUE);
-}
 
 int		parse_exp(t_liste **liste)
 {

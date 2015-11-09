@@ -2,9 +2,7 @@
 3
 #autre commentaire 2
 #commentaire 3
-1 23 3
-##start
-2 16 7
+L1 23 3
 #autre commentaire 5
 7 4 8
 3 16 3
@@ -14,6 +12,8 @@
 ##end
 #autre commentaire 4
 6 1 0
+##start
+52 16 7
 #autre commentaire 6
 0-4
 0-4
