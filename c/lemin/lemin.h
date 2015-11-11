@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/09 17:59:08 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/11 19:21:44 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,23 @@
 # include <fcntl.h>
 # include "libft/includes/libft.h"
 
+typedef struct s_room	t_room;
 typedef struct s_liste	t_liste;
+
+struct					s_room
+{
+	char				*name;
+	int					x;
+	int					y;
+}						;
 
 struct					s_liste
 {
 	unsigned int		start;
 	unsigned int		type;
-	char				*name_room;
 	char				*str;
 	int					nbr_ants;
+	t_room				room;
 	t_liste				*next;
 	t_liste				*previous;
 }						;
@@ -63,5 +71,7 @@ int						parse_noeud(t_liste **liste);
 int						lexer(t_liste **liste);
 int						check_name_room(t_liste **liste);
 int						cmp(t_liste *list);
+
+//supression de tt les room bug
 
 #endif

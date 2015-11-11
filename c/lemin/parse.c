@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/09 18:57:14 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/11 17:45:18 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,24 @@ int		parse_room(t_liste **liste)
 		(*liste) = (*liste)->next;
 	if (parse_cmd(liste) == FALSE)
 		return (FALSE);
-	while (parse_name_room(liste) == TRUE)
-	{
-		(*liste) = (*liste)->next;
-		while (parse_com(liste) == TRUE)
-			(*liste) = (*liste)->next;
-		while ((ret = parse_cmd(liste)) != 2)
-		{
-			(*liste) = (*liste)->next;
-			while (parse_com(liste) == TRUE)
-				(*liste) = (*liste)->next;
-		}
-	}
-	ft_putendl("lol");
+	else if (parse_name_room(liste) == FALSE)
+		return (FALSE);
 	return (TRUE);
 }
 
+static int	check_list(t_liste **liste)
+{
+	while ((*liste)->start != 1)
+		(*liste) = (*liste)->next;
+	if ((*liste)->type == 0)
+		return (FALSE);
+	(*liste) = (*liste)->next;
+	while ((*liste)->type != 0 && (*liste)->start != 1)
+		(*liste) = (*liste)->next;
+	if ((*liste)->type == 0)
+		return (FALSE);
+	return (TRUE);
+}
 
 int		parse_exp(t_liste **liste)
 {
@@ -74,9 +76,16 @@ int		parse_exp(t_liste **liste)
 		(*liste) = (*liste)->next;
 	if (parse_nbr(liste) == FALSE)
 		return (FALSE);
-	if (parse_room(liste) == FALSE)
-		return (FALSE);
+	while (parse_room(liste) == TRUE || parse_cmd(liste) == TRUE)
+	{
+		while (parse_com(liste) == TRUE)
+			(*liste) = (*liste)->next;
+		(*liste) = (*liste)->next;
+	}
+	(*liste) = (*liste)->previous;
 	if (parse_tube(liste) == FALSE)
+		return (FALSE);
+	if (check_list(liste) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }
