@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 14:17:13 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/12 14:43:37 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/12 18:59:06 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,31 @@ int		check_name_room(t_liste **liste)
 		{
 			while (tmp->type == 5 || tmp->type == 3 || tmp->type == 4)
 				tmp = tmp->next;
-			if (ft_strcmp(tmp->room.name, (*liste)->room.name) == TRUE)
+			if (ft_strcmp(tmp->room.name, (*liste)->room.name) == TRUE && tmp->room.name)
 				{
 					ft_error(3, (*liste)->room.name);
 					return (FALSE);
 				}
 			tmp = tmp->next;
+		}
+		(*liste) = (*liste)->next;
+	}
+	return (TRUE);
+}
+
+int		double_name(t_liste **liste)
+{
+	start_liste(liste);
+	search_type(liste, 6);
+	while ((*liste)->next->start != 1)
+	{
+		while ((*liste)->type == 5)
+			(*liste) = (*liste)->next;
+		if (ft_strcmp((*liste)->noeud.name_left, (*liste)->noeud.name_right)
+			== TRUE)
+		{
+			ft_error(5, (*liste)->str);
+			return (FALSE);
 		}
 		(*liste) = (*liste)->next;
 	}
@@ -62,6 +81,8 @@ int		check_noeud(t_liste **liste)
 		}
 		(*liste) = (*liste)->next;
 	}
+	if (double_name(liste) == FALSE)
+		return (FALSE);
 	return (TRUE);
 }
 

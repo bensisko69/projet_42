@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/12 14:47:16 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/12 18:59:58 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int		parse_exp(t_liste **liste)
 			(*liste) = (*liste)->next;
 		(*liste) = (*liste)->next;
 	}
-	(*liste) = (*liste)->previous;
 	if (parse_tube(liste) == FALSE)
 		return (FALSE);
 	if (check_list(liste) == FALSE)

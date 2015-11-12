@@ -6,11 +6,20 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 13:46:24 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/12 14:57:43 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/12 19:00:09 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
+
+static void	struct_noeud(t_liste **liste)
+{
+	char	**tab;
+
+	tab = ft_strsplit((*liste)->str, '-');
+	(*liste)->noeud.name_left = tab[0];
+	(*liste)->noeud.name_right = tab[1];
+}
 
 int		parse_noeud(t_liste **liste)
 {
@@ -30,6 +39,7 @@ int		parse_noeud(t_liste **liste)
 	if ((*liste)->str[i] == '\0' && (*liste)->type != 1)
 	{
 		(*liste)->type = 6;
+		struct_noeud(liste);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -47,6 +57,7 @@ int		parse_cmd(t_liste **liste)
 				(*liste) = (*liste)->next;
 			if (parse_name_room(liste) == FALSE)
 				return (FALSE);
+			(*liste)->room.type_room = 1;
 		}
 		else if (ft_strcmp((*liste)->str, "##end") == TRUE)
 		{
@@ -56,6 +67,7 @@ int		parse_cmd(t_liste **liste)
 				(*liste) = (*liste)->next;
 			if (parse_name_room(liste) == FALSE)
 				return (FALSE);
+			(*liste)->room.type_room = 2;
 		}
 		else
 			return (FALSE);
@@ -66,7 +78,7 @@ int		parse_cmd(t_liste **liste)
 }
 
 
-static void	tab(t_liste **liste)
+static void	struct_room(t_liste **liste)
 {
 	char	**tab;
 
@@ -74,6 +86,7 @@ static void	tab(t_liste **liste)
 	(*liste)->room.name = tab[0];
 	(*liste)->room.x = ft_atoi(tab[1]);
 	(*liste)->room.y = ft_atoi(tab[2]);
+	(*liste)->room.type_room = 0;
 }
 
 int		parse_name_room(t_liste **liste)
@@ -98,8 +111,8 @@ int		parse_name_room(t_liste **liste)
 	if ((*liste)->str[i] == '\0')
 	{
 		(*liste)->type = 2;
-		tab(liste);
-		return (TRUE);
+		struct_room(liste);
+			return (TRUE);
 	}
 	return (FALSE);
 }

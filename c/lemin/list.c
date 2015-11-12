@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 15:54:31 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/12 14:52:48 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/12 18:49:31 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,23 @@ void		print_liste(t_liste *list)
 		list = list->next;
 	while (list->next->start != 1)
 	{
-		ft_putnbr(list->type);
-		ft_putstr(list->str);
-		write(1, "\n", 1);
+		// ft_putnbr(list->type);
+		if (list->type == 2)
+		{
+			ft_putendl(list->str);
+			ft_putnbr(list->room.type_room);
+			ft_putendl(list->room.name);
+		}
 		list = list->next;
 	}
-	ft_putnbr(list->type);
-	ft_putstr(list->str);
+	// ft_putnbr(list->type);
+	// ft_putstr(list->str);
+	if (list->type == 2)
+	{
+		ft_putendl(list->str);
+		ft_putnbr(list->room.type_room);
+		ft_putendl(list->room.name);
+	}
 	write(1, "\n", 1);
 }
 
@@ -78,4 +88,26 @@ int		check_list(t_liste **liste)
 	if ((*liste)->type == 0)
 		return (FALSE);
 	return (TRUE);
+}
+
+void		init_room(t_liste **list)
+{
+	(*list)->room.x = 0;
+	(*list)->room.y = 0;
+	(*list)->room.type_room = 0;
+	(*list)->room.name = NULL;
+	(*list)->noeud.name_left = NULL;
+	(*list)->noeud.name_right = NULL;
+}
+
+void		init(t_liste **list)
+{
+	start_liste(list);
+	init_room(list);
+	(*list) = (*list)->next;
+	while ((*list)->start != 1)
+	{
+		init_room(list);
+		(*list) = (*list)->next;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/12 14:47:55 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/12 18:47:43 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 ** start
 ** 1 = 1er ellem
 ** 0 = ellem suivant
+** room
+** 0 autre
+** 1 start
+** 2 end
 */
 
 #ifndef LEMIN_H
@@ -36,9 +40,17 @@
 
 typedef struct s_room	t_room;
 typedef struct s_liste	t_liste;
+typedef struct s_noeud	t_noeud;
+
+struct					s_noeud
+{
+	char				*name_left;
+	char				*name_right;
+}						;
 
 struct					s_room
 {
+	int					type_room;
 	char				*name;
 	int					x;
 	int					y;
@@ -51,6 +63,7 @@ struct					s_liste
 	char				*str;
 	int					nbr_ants;
 	t_room				room;
+	t_noeud				noeud;
 	t_liste				*next;
 	t_liste				*previous;
 }						;
@@ -62,6 +75,8 @@ void					ft_liste_push(char *line, t_liste **list);
 void					print_liste(t_liste *list);
 void					search_type(t_liste **liste, int type);
 void					start_liste(t_liste **liste);
+void					init(t_liste **list);
+void					init_room(t_liste **list);
 
 int						parse(t_liste **list);
 int						parse_exp(t_liste **list);
@@ -75,6 +90,7 @@ int						check_list(t_liste **liste);
 int						lexer(t_liste **liste);
 int						check_name_room(t_liste **liste);
 int						check_noeud(t_liste **liste);
+int						double_name(t_liste **liste);
 
 //supression de tt les room bug
 
