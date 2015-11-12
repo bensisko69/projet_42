@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 13:46:24 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/11 19:15:42 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/12 14:57:43 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,20 @@ int		parse_cmd(t_liste **liste)
 	return (2);
 }
 
+
+static void	tab(t_liste **liste)
+{
+	char	**tab;
+
+	tab = ft_strsplit((*liste)->str, ' ');
+	(*liste)->room.name = tab[0];
+	(*liste)->room.x = ft_atoi(tab[1]);
+	(*liste)->room.y = ft_atoi(tab[2]);
+}
+
 int		parse_name_room(t_liste **liste)
 {
 	int	i;
-	char	**tab;
 
 	i = 0;
 	while (parse_com(liste) == TRUE)
@@ -88,10 +98,7 @@ int		parse_name_room(t_liste **liste)
 	if ((*liste)->str[i] == '\0')
 	{
 		(*liste)->type = 2;
-		tab = ft_strsplit((*liste)->str, ' ');
-		(*liste)->room.name = tab[0];
-		(*liste)->room.x = ft_atoi(tab[1]);
-		(*liste)->room.y = ft_atoi(tab[2]);
+		tab(liste);
 		return (TRUE);
 	}
 	return (FALSE);

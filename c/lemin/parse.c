@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/11 17:45:18 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/12 14:47:16 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,6 @@ int		parse_room(t_liste **liste)
 	return (TRUE);
 }
 
-static int	check_list(t_liste **liste)
-{
-	while ((*liste)->start != 1)
-		(*liste) = (*liste)->next;
-	if ((*liste)->type == 0)
-		return (FALSE);
-	(*liste) = (*liste)->next;
-	while ((*liste)->type != 0 && (*liste)->start != 1)
-		(*liste) = (*liste)->next;
-	if ((*liste)->type == 0)
-		return (FALSE);
-	return (TRUE);
-}
-
 int		parse_exp(t_liste **liste)
 {
 	while (parse_com(liste) == TRUE)
@@ -92,8 +78,7 @@ int		parse_exp(t_liste **liste)
 
 int		parse(t_liste **liste)
 {
-	while ((*liste)->start != 1)
-		(*liste) = (*liste)->next;
+	start_liste(liste);
 	if (parse_exp(liste) ==  FALSE)
 		return (FALSE);
 	return (TRUE);

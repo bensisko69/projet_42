@@ -6,11 +6,23 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/11 19:23:08 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/12 14:46:40 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
+
+void	search_type(t_liste **liste, int type)
+{
+	while ((*liste)->type != type)
+		(*liste) = (*liste)->next;
+}
+
+void	start_liste(t_liste **liste)
+{
+	while ((*liste)->start !=1)
+		(*liste) = (*liste)->next;
+}
 
 static char		*delete_tab_or_spaces(char *str)
 {
@@ -64,6 +76,7 @@ int				main(int ac, char **av)
 		if (lexer(&list) == FALSE)
 			return (FALSE);
 		ft_putendl("GOOD JOB GUY!!!");
+		print_liste(list);
 	}
 	return (TRUE);
 }

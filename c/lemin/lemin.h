@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/11 19:21:44 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/12 14:47:55 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define OPEN_FALED "Open faled"
 # define PARSE_ERROR "Parse error"
 # define NAME_ERROR "Two name of room"
+# define DOUBLE_NOEUD "Two noeud"
 # include <stdlib.h>
 # include <fcntl.h>
 # include "libft/includes/libft.h"
@@ -45,8 +46,8 @@ struct					s_room
 
 struct					s_liste
 {
-	unsigned int		start;
-	unsigned int		type;
+	int					start;
+	int					type;
 	char				*str;
 	int					nbr_ants;
 	t_room				room;
@@ -59,6 +60,8 @@ void					ft_error(int nbr, char *str);
 t_liste					*create_ellem(char *line);
 void					ft_liste_push(char *line, t_liste **list);
 void					print_liste(t_liste *list);
+void					search_type(t_liste **liste, int type);
+void					start_liste(t_liste **liste);
 
 int						parse(t_liste **list);
 int						parse_exp(t_liste **list);
@@ -67,10 +70,11 @@ int						parse_nbr(t_liste **liste);
 int						parse_name_room(t_liste **liste);
 int						parse_cmd(t_liste **liste);
 int						parse_noeud(t_liste **liste);
+int						check_list(t_liste **liste);
 
 int						lexer(t_liste **liste);
 int						check_name_room(t_liste **liste);
-int						cmp(t_liste *list);
+int						check_noeud(t_liste **liste);
 
 //supression de tt les room bug
 
