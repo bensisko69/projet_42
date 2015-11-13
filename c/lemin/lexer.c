@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 14:17:13 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/12 18:59:06 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/13 14:42:06 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,14 @@ int		check_noeud(t_liste **liste)
 	return (TRUE);
 }
 
+int		check_name_room(t_liste **liste)
+{
+	start_liste(liste);
+	search_type(liste, 2);
+
+	return (TRUE);
+}
+
 int		lexer(t_liste **liste)
 {
 	start_liste(liste);
@@ -93,5 +101,24 @@ int		lexer(t_liste **liste)
 		return (FALSE);
 	if (check_noeud(liste) == FALSE)
 		return (FALSE);
+	if (check_name_noeud(liste) = FALSE)
+		return (FALSE);
 	return (TRUE);
 }
+
+
+/* type dans la structure.
+** 1 type NBR
+** 2 type ROOM
+** 3 type start
+** 4 type end
+** 5 type COMMENT
+** 6 type TUBE
+** start
+** 1 = 1er ellem
+** 0 = ellem suivant
+** room
+** 0 autre
+** 1 start
+** 2 end
+*/

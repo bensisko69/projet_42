@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/12 18:47:43 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/13 14:33:50 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int						lexer(t_liste **liste);
 int						check_name_room(t_liste **liste);
 int						check_noeud(t_liste **liste);
 int						double_name(t_liste **liste);
+int						check_name_room(t_liste **liste);
 
 //supression de tt les room bug
 
