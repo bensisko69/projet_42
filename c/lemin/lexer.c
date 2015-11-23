@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 14:17:13 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/13 14:42:06 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/23 15:29:36 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,36 @@ int		check_noeud(t_liste **liste)
 	return (TRUE);
 }
 
-int		check_name_room(t_liste **liste)
+static int	check(char *str, t_liste *liste)
 {
-	start_liste(liste);
-	search_type(liste, 2);
+	while (liste->type == 2)
+	{
+		if (ft_strcmp(liste->room.name, str) == TRUE)
+			return (TRUE);
+		liste = liste->next;
+		while (liste->type == 5 || liste->type == 3 || liste->type == 4)
+			liste = liste->next;
+	}
+	ft_error(6, str);
+	return (FALSE);
+}
 
+int		check_name_noeud(t_liste **liste)
+{
+	t_liste *tmp;
+
+	start_liste(liste);
+	tmp = (*liste);
+	search_type(liste, 2);
+	search_type(&tmp, 6);
+	while (tmp->type == 6)
+	{
+		if (check(tmp->noeud.name_left, (*liste)) == FALSE)
+			return (FALSE);
+		if (check(tmp->noeud.name_right, (*liste)) == FALSE)
+			return (FALSE);
+		tmp = tmp->next;
+	}
 	return (TRUE);
 }
 
@@ -101,24 +126,7 @@ int		lexer(t_liste **liste)
 		return (FALSE);
 	if (check_noeud(liste) == FALSE)
 		return (FALSE);
-	if (check_name_noeud(liste) = FALSE)
+	if (check_name_noeud(liste) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }
-
-
-/* type dans la structure.
-** 1 type NBR
-** 2 type ROOM
-** 3 type start
-** 4 type end
-** 5 type COMMENT
-** 6 type TUBE
-** start
-** 1 = 1er ellem
-** 0 = ellem suivant
-** room
-** 0 autre
-** 1 start
-** 2 end
-*/

@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 15:54:31 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/12 18:49:31 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/23 16:23:37 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,24 +57,25 @@ void		print_liste(t_liste *list)
 		list = list->next;
 	while (list->next->start != 1)
 	{
-		// ft_putnbr(list->type);
-		if (list->type == 2)
-		{
-			ft_putendl(list->str);
-			ft_putnbr(list->room.type_room);
-			ft_putendl(list->room.name);
-		}
+		ft_putnbr(list->type);
+		ft_putendl(list->str);
+		// if (list->type == 2)
+		// {
+		// 	ft_putendl(list->str);
+		// 	ft_putnbr(list->room.type_room);
+		// 	ft_putendl(list->room.name);
+		// }
 		list = list->next;
 	}
-	// ft_putnbr(list->type);
-	// ft_putstr(list->str);
-	if (list->type == 2)
-	{
-		ft_putendl(list->str);
-		ft_putnbr(list->room.type_room);
-		ft_putendl(list->room.name);
-	}
-	write(1, "\n", 1);
+	ft_putnbr(list->type);
+	ft_putendl(list->str);
+	// if (list->type == 2)
+	// {
+	// 	ft_putendl(list->str);
+	// 	ft_putnbr(list->room.type_room);
+	// 	ft_putendl(list->room.name);
+	// }
+	// write(1, "\n", 1);
 }
 
 int		check_list(t_liste **liste)

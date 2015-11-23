@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/12 18:59:58 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/23 17:46:05 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,48 @@ int		parse_exp(t_liste **liste)
 	return (TRUE);
 }
 
+static int		list(t_liste **liste)
+{
+	int	nbr;
+	int cmd_start;
+	int	cmd_end;
+	int	rooms;
+	int	tubes;
+
+	nbr = 0;
+	cmd_start = 0;
+	cmd_end = 0;
+	rooms = 0;
+	tubes = 0;
+	start_liste(liste);
+	while ((*liste)->type == 5)
+		(*liste) = (*liste)->next;
+	if ((*liste)->type == 1)
+		nbr = 1;
+	(*liste) = (*liste)->next;
+	while ((*liste)->start != 1)
+	{
+		if ((*liste)->type == 2)
+			rooms = 1;
+		else if ((*liste)->type == 3)
+			cmd_start = 1;
+		else if ((*liste)->type == 4)
+			cmd_end = 1;
+		else if ((*liste)->type == 6)
+			tubes = 1;
+		(*liste) = (*liste)->next;
+	}
+	if (nbr == 1 && cmd_start == 1 && cmd_end == 1 && rooms == 1 && tubes == 1)
+		return (TRUE);
+	return (FALSE);
+}
+
 int		parse(t_liste **liste)
 {
 	start_liste(liste);
 	if (parse_exp(liste) ==  FALSE)
+		return (FALSE);
+	else if (list(liste) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }

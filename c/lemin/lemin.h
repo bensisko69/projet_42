@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/13 14:33:50 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/23 15:22:09 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define PARSE_ERROR "Parse error"
 # define NAME_ERROR "Two name of room"
 # define DOUBLE_NOEUD "Two noeud"
+# define NAME_FALE "Name false"
 # include <stdlib.h>
 # include <fcntl.h>
 # include "libft/includes/libft.h"
@@ -91,7 +92,7 @@ int						lexer(t_liste **liste);
 int						check_name_room(t_liste **liste);
 int						check_noeud(t_liste **liste);
 int						double_name(t_liste **liste);
-int						check_name_room(t_liste **liste);
+int						check_name_noeud(t_liste **liste);
 
 //supression de tt les room bug
 

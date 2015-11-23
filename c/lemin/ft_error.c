@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 15:28:19 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/12 17:27:30 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/23 15:22:19 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,6 @@ void	ft_error(int nbr, char *str)
 		puts_(DOUBLE_NOEUD, str);
 	else if(nbr == 5)
 		puts_(NAME_ERROR, str);
+	else if (nbr == 6)
+		puts_(NAME_FALE, str);
 }
