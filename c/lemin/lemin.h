@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/24 17:13:14 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/24 17:30:02 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ struct					s_map
 
 void					ft_error(int nbr, char *str);
 
-t_room					struct_room(int type, t_list **liste);
-t_noeud					struct_noeud(t_list **liste);
+t_room					*struct_room(int type, t_list **liste);
+t_noeud					*struct_noeud(t_list **liste);
 
 int						parse(t_list **liste, t_map *map);
 int						parse_exp(t_list **liste, t_map *map);

@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/24 17:19:26 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/24 17:27:16 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int		parse_nbr(t_list **liste,t_map *map)
 	int	i;
 
 	i = 0;
-	while (ft_isdigit((*liste)->content)[i] == 1)
-		i++;
-	if ((*liste)->content[i] == '\0')
+	while (ft_isdigit(((char *)((*liste)->content))[i] == 1))
+			i++;
+	if (((char *)((*liste)->content))[i] == '\0')
 	{
 		map->nb_ants = ft_atoi((*liste)->content);
 		(*liste) = (*liste)->next;

@@ -6,16 +6,16 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 13:46:24 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/24 17:13:19 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/24 17:30:12 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-t_noeud		struct_noeud(t_liste **liste)
+t_noeud		*struct_noeud(t_liste **liste)
 {
 	char	**tab;
-	t_noeud	noeud;
+	t_noeud	*noeud;
 
 	tab = ft_strsplit((*liste)->str, '-');
 	noeud.name_left = tab[0];
@@ -44,7 +44,7 @@ int		parse_noeud(t_liste **liste, t_map *map)
 	return (FALSE);
 }
 
-t_room		struct_room(int type, t_liste **liste)
+t_room		*struct_room(int type, t_liste **liste)
 {
 	char	**tab;
 	t_room	room;
