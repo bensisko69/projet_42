@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/23 15:22:09 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/24 17:13:14 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 ** 2 type ROOM
 ** 3 type start
 ** 4 type end
-** 5 type COMMENT
 ** 6 type TUBE
 ** start
 ** 1 = 1er ellem
@@ -39,8 +38,8 @@
 # include <fcntl.h>
 # include "libft/includes/libft.h"
 
+typedef struct s_map	t_map;
 typedef struct s_room	t_room;
-typedef struct s_liste	t_liste;
 typedef struct s_noeud	t_noeud;
 
 struct					s_noeud
@@ -57,43 +56,30 @@ struct					s_room
 	int					y;
 }						;
 
-struct					s_liste
+struct					s_map
 {
-	int					start;
-	int					type;
-	char				*str;
-	int					nbr_ants;
-	t_room				room;
-	t_noeud				noeud;
-	t_liste				*next;
-	t_liste				*previous;
-}						;
+	int			nb_ants;
+	t_list		*rooms;
+	t_list		*noeuds;
+};
 
 void					ft_error(int nbr, char *str);
 
-t_liste					*create_ellem(char *line);
-void					ft_liste_push(char *line, t_liste **list);
-void					print_liste(t_liste *list);
-void					search_type(t_liste **liste, int type);
-void					start_liste(t_liste **liste);
-void					init(t_liste **list);
-void					init_room(t_liste **list);
+t_room					struct_room(int type, t_list **liste);
+t_noeud					struct_noeud(t_list **liste);
 
-int						parse(t_liste **list);
-int						parse_exp(t_liste **list);
-int						parse_com(t_liste **list);
-int						parse_nbr(t_liste **liste);
-int						parse_name_room(t_liste **liste);
-int						parse_cmd(t_liste **liste);
-int						parse_noeud(t_liste **liste);
-int						check_list(t_liste **liste);
+int						parse(t_list **liste, t_map *map);
+int						parse_exp(t_list **liste, t_map *map);
+int						parse_nbr(t_list **liste, t_map *map);
+int						parse_room(t_list **liste,t_map *map);
+int						parse_name_room(t_list **liste);
+int						parse_cmd(t_list **liste, t_map *map);
+int						parse_noeud(t_list **liste, t_map *map);
 
-int						lexer(t_liste **liste);
-int						check_name_room(t_liste **liste);
-int						check_noeud(t_liste **liste);
-int						double_name(t_liste **liste);
-int						check_name_noeud(t_liste **liste);
-
-//supression de tt les room bug
+int						lexer(t_list **liste);
+int						check_name_room(t_list **liste);
+int						check_noeud(t_list **liste);
+int						double_name(t_list **liste);
+int						check_name_noeud(t_list **liste);
 
 #endif

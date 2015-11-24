@@ -6,23 +6,11 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/23 15:40:17 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/24 17:00:24 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
-
-void	search_type(t_liste **liste, int type)
-{
-	while ((*liste)->type != type)
-		(*liste) = (*liste)->next;
-}
-
-void	start_liste(t_liste **liste)
-{
-	while ((*liste)->start !=1)
-		(*liste) = (*liste)->next;
-}
 
 static char		*delete_tab_or_spaces(char *str)
 {
@@ -47,11 +35,15 @@ static char		*delete_tab_or_spaces(char *str)
 
 int				main(int ac, char **av)
 {
-	t_liste	*list;
+	t_list	*list;
+	t_map	map;
 	char	*line;
 	int		fd;
+	char	*str;
 
 	list = NULL;
+	map.rooms = NULL;
+	map.noeuds = NULL;
 	if (ac == 2)
 	{
 		if ((fd = open(av[1], O_RDONLY)) < 0)
@@ -62,24 +54,28 @@ int				main(int ac, char **av)
 		while (get_next_line(fd, &line) > 0)
 		{
 			if (line[0] == ' ' || line[0] == '\t')
-				ft_liste_push(delete_tab_or_spaces(line), &list);
+			{
+				str = delete_tab_or_spaces(line);
+				if (str && str[0] == '#' && str[1] != '#')
+					continue;
+				ft_lstappend(&list, ft_lstnew(str, ft_strlen(str)));
+			}
 			if (line[0] != '\0')
-				ft_liste_push(line, &list);
+			{
+				if (str && str[0] == '#' && str[1] != '#' )
+					continue;
+				ft_lstappend(&list, ft_lstnew(line, ft_strlen(line)));
+			}
 		}
 		if (line[0] == '\0')
 			free(line);
 		if (list)
 		{
-			init(&list);
-			if (parse(&list) == FALSE)
+			if (parse(&list, &map) == TRUE)
 			{
-				ft_error(2, list->str);
-				return (FALSE);
+				ft_putendl("GOOD JOB GUY!!!");
+				lexer(&list);
 			}
-			print_liste(list);
-			if (lexer(&list) == FALSE)
-				return (FALSE);
-			ft_putendl("GOOD JOB GUY!!!");
 		}
 	}
 	return (FALSE);

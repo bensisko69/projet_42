@@ -6,7 +6,7 @@
 #    By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/20 12:00:34 by lrenoud-          #+#    #+#              #
-#    Updated: 2015/09/30 14:30:42 by lrenoud-         ###   ########.fr        #
+#    Updated: 2015/11/24 15:16:46 by lrenoud-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRC = ft_strlen.c\
 	  ft_lstdel.c\
 	  ft_lstadd.c\
 	  ft_lstiter.c\
+	  ft_lstappend.c\
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/23 17:46:05 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/24 17:19:26 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,104 +19,63 @@
 */
 #include "lemin.h"
 
-int		parse_nbr(t_liste **liste)
+int		parse_nbr(t_list **liste,t_map *map)
 {
 	int	i;
 
 	i = 0;
-	while (ft_isdigit((int)(*liste)->str[i]) == 1)
+	while (ft_isdigit((*liste)->content)[i] == 1)
 		i++;
-	if ((*liste)->str[i] == '\0')
+	if ((*liste)->content[i] == '\0')
 	{
-		(*liste)->type = 1;
-		(*liste)->nbr_ants = ft_atoi((*liste)->str);
+		map->nb_ants = ft_atoi((*liste)->content);
 		(*liste) = (*liste)->next;
 		return (TRUE);
 	}
 	return (FALSE);
 }
 
-int		parse_tube(t_liste **liste)
+int		parse_tube(t_list **liste,t_map *map)
 {
-	while (parse_com(liste) == TRUE)
-		(*liste) = (*liste)->next;
-	while (parse_noeud(liste) == TRUE)
-		(*liste) = (*liste)->next;
-	return (TRUE);
-}
-
-int		parse_room(t_liste **liste)
-{
-	while (parse_com(liste) == TRUE)
-		(*liste) = (*liste)->next;
-	if (parse_cmd(liste) == FALSE)
-		return (FALSE);
-	else if (parse_name_room(liste) == FALSE)
-		return (FALSE);
-	return (TRUE);
-}
-
-int		parse_exp(t_liste **liste)
-{
-	while (parse_com(liste) == TRUE)
-		(*liste) = (*liste)->next;
-	if (parse_nbr(liste) == FALSE)
-		return (FALSE);
-	while (parse_room(liste) == TRUE || parse_cmd(liste) == TRUE)
+	if (parse_noeud(liste, map) == TRUE)
 	{
-		while (parse_com(liste) == TRUE)
+		while (parse_noeud(liste, map) == TRUE)
 			(*liste) = (*liste)->next;
-		(*liste) = (*liste)->next;
 	}
-	if (parse_tube(liste) == FALSE)
-		return (FALSE);
-	if (check_list(liste) == FALSE)
+	else
 		return (FALSE);
 	return (TRUE);
 }
 
-static int		list(t_liste **liste)
+int		parse_room(t_list **liste,t_map *map)
 {
-	int	nbr;
-	int cmd_start;
-	int	cmd_end;
-	int	rooms;
-	int	tubes;
-
-	nbr = 0;
-	cmd_start = 0;
-	cmd_end = 0;
-	rooms = 0;
-	tubes = 0;
-	start_liste(liste);
-	while ((*liste)->type == 5)
-		(*liste) = (*liste)->next;
-	if ((*liste)->type == 1)
-		nbr = 1;
-	(*liste) = (*liste)->next;
-	while ((*liste)->start != 1)
+	if (parse_cmd(liste, map) == FALSE)
+		return (FALSE);
+	if (parse_name_room(liste) == TRUE)
 	{
-		if ((*liste)->type == 2)
-			rooms = 1;
-		else if ((*liste)->type == 3)
-			cmd_start = 1;
-		else if ((*liste)->type == 4)
-			cmd_end = 1;
-		else if ((*liste)->type == 6)
-			tubes = 1;
-		(*liste) = (*liste)->next;
-	}
-	if (nbr == 1 && cmd_start == 1 && cmd_end == 1 && rooms == 1 && tubes == 1)
+		ft_lstappend(map->rooms, ft_lstnew(struct_room(2,liste), sizeof(t_room)));
 		return (TRUE);
+	}
 	return (FALSE);
 }
 
-int		parse(t_liste **liste)
+int		parse_exp(t_list **liste,t_map *map)
 {
-	start_liste(liste);
-	if (parse_exp(liste) ==  FALSE)
+	if (parse_nbr(liste, map) == FALSE)
 		return (FALSE);
-	else if (list(liste) == FALSE)
+	if (parse_room(liste, map) == TRUE)
+	{
+		while (parse_room(liste) == TRUE)
+			(*liste) = (*liste)->next;
+	}
+	if (parse_tube(liste, map) == FALSE)
+		return (FALSE);
+	return (TRUE);
+}
+
+int		parse(t_list **liste,t_map *map)
+{
+	if (parse_exp(liste, map) ==  FALSE)
 		return (FALSE);
 	return (TRUE);
 }

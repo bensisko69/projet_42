@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstappend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/19 14:25:13 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/24 15:27:27 by lrenoud-         ###   ########.fr       */
+/*   Created: 2015/11/24 15:14:21 by lrenoud-          #+#    #+#             */
+/*   Updated: 2015/11/24 15:31:45 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(const void *content, size_t content_size)
+void	ft_lstappend(t_list **alst, t_list *new_element)
 {
-	t_list  *element;
+	t_list	*it;
 
-	element = (t_list *)malloc(sizeof(t_list));
-	if (element)
+	if (!*alst)
+		*alst = new_element;
+	else
 	{
-		element->content_size = (content ? content_size : 0);
-		element->content = (content ? malloc(content_size) : 0);
-		if (element->content)
-			ft_memcpy(element->content, content, content_size);
-		element->next = 0;
+		it = *alst;
+		while (it->next)
+			it = it->next;
+		it->next = new_element;
 	}
-	return (element);
 }
