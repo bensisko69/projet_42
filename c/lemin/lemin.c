@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/24 17:37:11 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/25 16:10:34 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,11 @@ int				main(int ac, char **av)
 	char	*str;
 
 	list = NULL;
-	map.rooms = NULL;
-	map.noeuds = NULL;
+	ft_bzero(&map, sizeof(map));
 	if (ac == 2)
 	{
 		if ((fd = open(av[1], O_RDONLY)) < 0)
-		{
-			ft_error(1, "");
 			return (FALSE);
-		}
 		while (get_next_line(fd, &line) > 0)
 		{
 			if (line[0] == ' ' || line[0] == '\t')
@@ -74,8 +70,9 @@ int				main(int ac, char **av)
 			if (parse(&list, &map) == TRUE)
 			{
 				ft_putendl("GOOD JOB GUY!!!");
-				lexer(&list);
+				// lexer(&list);
 			}
+			// print(&map);
 		}
 	}
 	return (FALSE);

@@ -6,17 +6,19 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/24 17:27:16 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/25 16:09:35 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*GRAMM:
+/*
+** GRAMM:
 ** exp			:=	[comment]* NBR [room]+ [tube]+ [comment]*
 ** room			:=	[comment]* [commande]? WORD NBR{2}
 ** tube			:=	[comment]* NBR - NBR
 ** commande		:=	DIEZE DIEZE [WORD]*
 ** comment		:=	DIEZE [WORD]*
 */
+
 #include "lemin.h"
 
 int		parse_nbr(t_list **liste,t_map *map)
@@ -24,7 +26,7 @@ int		parse_nbr(t_list **liste,t_map *map)
 	int	i;
 
 	i = 0;
-	while (ft_isdigit(((char *)((*liste)->content))[i] == 1))
+	while (ft_isdigit(((char *)((*liste)->content))[i]) == 1)
 			i++;
 	if (((char *)((*liste)->content))[i] == '\0')
 	{
@@ -53,7 +55,7 @@ int		parse_room(t_list **liste,t_map *map)
 		return (FALSE);
 	if (parse_name_room(liste) == TRUE)
 	{
-		ft_lstappend(map->rooms, ft_lstnew(struct_room(2,liste), sizeof(t_room)));
+		ft_lstappend(&map->rooms, ft_lstnew(struct_room(2,liste), sizeof(t_room)));
 		return (TRUE);
 	}
 	return (FALSE);
@@ -65,7 +67,7 @@ int		parse_exp(t_list **liste,t_map *map)
 		return (FALSE);
 	if (parse_room(liste, map) == TRUE)
 	{
-		while (parse_room(liste) == TRUE)
+		while (parse_room(liste, map) == TRUE)
 			(*liste) = (*liste)->next;
 	}
 	if (parse_tube(liste, map) == FALSE)

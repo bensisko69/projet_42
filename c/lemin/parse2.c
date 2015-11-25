@@ -6,37 +6,37 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 13:46:24 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/24 17:30:12 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/25 16:18:08 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-t_noeud		*struct_noeud(t_liste **liste)
+t_noeud		*struct_noeud(t_list **liste)
 {
 	char	**tab;
 	t_noeud	*noeud;
 
-	tab = ft_strsplit((*liste)->str, '-');
-	noeud.name_left = tab[0];
-	noeud.name_right = tab[1];
+	noeud = (t_noeud *)malloc(sizeof(*noeud));
+	tab = ft_strsplit((*liste)->content, '-');
+	noeud->name_left = ft_strdup(tab[0]);
+	noeud->name_right = ft_strdup(tab[1]);
+	ft_strdel(tab);
 	return (noeud);
 }
 
-int		parse_noeud(t_liste **liste, t_map *map)
+int		parse_noeud(t_list **liste, t_map *map)
 {
 	int	i;
 
 	i = 0;
-	if ((*liste)->str[0] == 'L' || (*liste)->str[0] == '#')
-		return (FALSE);
-	while (ft_isalnum((*liste)->str[i]) == 1 && (*liste)->str[i])
+	while (ft_isalnum(((char *)((*liste)->content))[i]) == 1 && ((char *)((*liste)->content))[i])
 		i++;
-	if ((*liste)->str[i] != ' ' && (*liste)->str[i] && (*liste)->str[i] == '-')
+	if (((char *)((*liste)->content))[i] != ' ' && ((char *)((*liste)->content))[i] && ((char *)((*liste)->content))[i] == '-')
 		i++;
-	while (ft_isalnum((*liste)->str[i]) == 1 && (*liste)->str[i])
+	while (ft_isalnum(((char *)((*liste)->content))[i]) == 1 && ((char *)((*liste)->content))[i])
 		i++;
-	if ((*liste)->str[i] == '\0')
+	if (((char *)((*liste)->content))[i] == '\0')
 	{
 		ft_lstappend(&map->noeuds, ft_lstnew(struct_noeud(liste), sizeof(t_noeud)));
 		return (TRUE);
@@ -44,31 +44,33 @@ int		parse_noeud(t_liste **liste, t_map *map)
 	return (FALSE);
 }
 
-t_room		*struct_room(int type, t_liste **liste)
+t_room		*struct_room(int type, t_list **liste)
 {
 	char	**tab;
-	t_room	room;
+	t_room	*room;
 
-	tab = ft_strsplit((*liste)->str, ' ');
-	room.name = tab[0];
-	room.x = ft_atoi(tab[1]);
-	room.y = ft_atoi(tab[2]);
-	room.type_room = type;
+	room = (t_room*)malloc(sizeof(*room));
+	tab = ft_strsplit((*liste)->content, ' ');
+	room->name = ft_strdup(tab[0]);
+	room->x = ft_atoi(tab[1]);
+	room->y = ft_atoi(tab[2]);
+	room->type_room = type;
+	ft_strdel(tab);
 	return (room);
 }
 
-int		parse_cmd(t_liste **liste, t_map *map)
+int		parse_cmd(t_list **liste, t_map *map)
 {
-	if (ft_strncmp((*liste)->str, "##", 2) == TRUE)
+	if (ft_strncmp((*liste)->content, "##", 2) == TRUE)
 	{
-		if (ft_strcmp((*liste)->str, "##start") == TRUE)
+		if (ft_strcmp((*liste)->content, "##start") == TRUE)
 		{
 			(*liste) = (*liste)->next;
 			if (parse_name_room(liste) == FALSE)
 				return (FALSE);
 			ft_lstappend(&map->rooms, ft_lstnew(struct_room(3, liste), sizeof(t_room)));
 		}
-		else if (ft_strcmp((*liste)->str, "##end") == TRUE)
+		else if (ft_strcmp((*liste)->content, "##end") == TRUE)
 		{
 			(*liste) = (*liste)->next;
 			if (parse_name_room(liste) == FALSE)
@@ -83,24 +85,24 @@ int		parse_cmd(t_liste **liste, t_map *map)
 	return (2);
 }
 
-int		parse_name_room(t_liste **liste)
+int		parse_name_room(t_list **liste)
 {
 	int	i;
 
 	i = 0;
-	if ((*liste)->str[0] == 'L' || (*liste)->str[0] == '#')
+	if (((char *)((*liste)->content))[0] == 'L' || ((char *)((*liste)->content))[0] == '#')
 		return (FALSE);
-	while (ft_isalnum((int)(*liste)->str[i]) == 1 && (*liste)->str[i])
+	while (ft_isalnum(((char *)((*liste)->content))[i]) == 1 && ((char *)((*liste)->content))[i])
 		i++;
-	if ((*liste)->str[i] == ' ' && (*liste)->str[i] && (*liste)->str[i] != '-')
+	if (((char *)((*liste)->content))[i] == ' ' && ((char *)((*liste)->content))[i] && ((char *)((*liste)->content))[i] != '-')
 		i++;
-	while (ft_isdigit((int)(*liste)->str[i]) == 1 && (*liste)->str[i])
+	while (ft_isdigit(((char *)((*liste)->content))[i]) == 1 && ((char *)((*liste)->content))[i])
 		i++;
-	if ((*liste)->str[i] == ' ' && (*liste)->str[i])
+	if (((char *)((*liste)->content))[i] == ' ' && ((char *)((*liste)->content))[i])
 		i++;
-	while (ft_isdigit((int)(*liste)->str[i]) == 1 && (*liste)->str[i])
+	while (ft_isdigit(((char *)((*liste)->content))[i]) == 1 && ((char *)((*liste)->content))[i])
 		i++;
-	if ((*liste)->str[i] == '\0')
+	if (((char *)((*liste)->content))[i] == '\0')
 		return (TRUE);
 	return (FALSE);
 }

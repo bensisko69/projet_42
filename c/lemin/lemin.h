@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/24 17:30:02 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/25 15:08:33 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@
 # define LEMIN_H
 # define FALSE 1
 # define TRUE 0
-# define OPEN_FALED "Open faled"
-# define PARSE_ERROR "Parse error"
-# define NAME_ERROR "Two name of room"
-# define DOUBLE_NOEUD "Two noeud"
-# define NAME_FALE "Name false"
 # include <stdlib.h>
 # include <fcntl.h>
 # include "libft/includes/libft.h"
@@ -63,8 +58,6 @@ struct					s_map
 	t_list		*noeuds;
 };
 
-void					ft_error(int nbr, char *str);
-
 t_room					*struct_room(int type, t_list **liste);
 t_noeud					*struct_noeud(t_list **liste);
 
@@ -81,5 +74,7 @@ int						check_name_room(t_list **liste);
 int						check_noeud(t_list **liste);
 int						double_name(t_list **liste);
 int						check_name_noeud(t_list **liste);
+
+void					print(t_map *map);
 
 #endif

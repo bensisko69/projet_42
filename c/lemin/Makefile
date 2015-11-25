@@ -6,7 +6,7 @@
 #    By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/27 14:37:53 by lrenoud-          #+#    #+#              #
-#    Updated: 2015/11/24 16:54:18 by lrenoud-         ###   ########.fr        #
+#    Updated: 2015/11/25 14:53:07 by lrenoud-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ INCLUDE_DIR = ./includes/
 LIB_DIR = ./libft/includes/
 
 SRC = lemin.c\
-	  ft_error.c\
 	  parse.c\
 	  parse2.c\
+	  print.c\
 
 OBJ = $(SRC:.c=.o)
 
