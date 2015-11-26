@@ -6,53 +6,41 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 14:17:13 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/23 15:29:36 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/26 15:01:17 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-int		check_name_room(t_liste **liste)
+int		check_name_room(t_map *map)
 {
-	t_liste	*tmp;
+	t_list	*tmp;
+	t_list	*it;
 
-	while ((*liste)->type == 5 || (*liste)-> type == 1)
-		(*liste) = (*liste)->next;
-	while ((*liste)->next->type != 6)
+	it = map->rooms;
+	while (map)
 	{
-		while ((*liste)->type == 5 || (*liste)->type == 3 || (*liste)->type == 4)
-			(*liste) = (*liste)->next;
-		tmp = (*liste)->next;
-		while (tmp->next->type != 6)
+		tmp = map->rooms->next;
+		while (tmp->next)
 		{
-			while (tmp->type == 5 || tmp->type == 3 || tmp->type == 4)
-				tmp = tmp->next;
-			if (ft_strcmp(tmp->room.name, (*liste)->room.name) == TRUE && tmp->room.name)
-				{
-					ft_error(3, (*liste)->room.name);
+			if (ft_strcmp(((t_room*)(tmp->content))->name, ((t_room*)(it->content))->name) == TRUE)
 					return (FALSE);
-				}
 			tmp = tmp->next;
 		}
-		(*liste) = (*liste)->next;
+		it = it->next;
 	}
 	return (TRUE);
 }
 
-int		double_name(t_liste **liste)
+int		double_name(t_map *map)
 {
-	start_liste(liste);
-	search_type(liste, 6);
 	while ((*liste)->next->start != 1)
 	{
 		while ((*liste)->type == 5)
 			(*liste) = (*liste)->next;
 		if (ft_strcmp((*liste)->noeud.name_left, (*liste)->noeud.name_right)
 			== TRUE)
-		{
-			ft_error(5, (*liste)->str);
 			return (FALSE);
-		}
 		(*liste) = (*liste)->next;
 	}
 	return (TRUE);
@@ -61,8 +49,6 @@ int		double_name(t_liste **liste)
 int		check_noeud(t_liste **liste)
 {
 	t_liste	*tmp;
-	start_liste(liste);
-	search_type(liste, 6);
 	while ((*liste)->next->start != 1)
 	{
 		while ((*liste)->type == 5)
@@ -96,7 +82,6 @@ static int	check(char *str, t_liste *liste)
 		while (liste->type == 5 || liste->type == 3 || liste->type == 4)
 			liste = liste->next;
 	}
-	ft_error(6, str);
 	return (FALSE);
 }
 
@@ -104,10 +89,7 @@ int		check_name_noeud(t_liste **liste)
 {
 	t_liste *tmp;
 
-	start_liste(liste);
 	tmp = (*liste);
-	search_type(liste, 2);
-	search_type(&tmp, 6);
 	while (tmp->type == 6)
 	{
 		if (check(tmp->noeud.name_left, (*liste)) == FALSE)
@@ -119,12 +101,11 @@ int		check_name_noeud(t_liste **liste)
 	return (TRUE);
 }
 
-int		lexer(t_liste **liste)
+int		lexer(t_map *map)
 {
-	start_liste(liste);
-	if (check_name_room(liste) == FALSE)
+	if (check_name_room(map) == FALSE)
 		return (FALSE);
-	if (check_noeud(liste) == FALSE)
+	if (check_noeud(map) == FALSE)
 		return (FALSE);
 	if (check_name_noeud(liste) == FALSE)
 		return (FALSE);

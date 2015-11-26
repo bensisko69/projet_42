@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/25 16:10:34 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/26 14:44:22 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,16 @@ int				main(int ac, char **av)
 				ft_lstappend(&list, ft_lstnew(line, ft_strlen(line)));
 			}
 		}
-		if (line[0] == '\0')
+		if (line && line[0] == '\0')
 			free(line);
 		if (list)
 		{
 			if (parse(&list, &map) == TRUE)
 			{
 				ft_putendl("GOOD JOB GUY!!!");
-				// lexer(&list);
+				lexer(&map);
 			}
-			// print(&map);
+			print(&map);
 		}
 	}
 	return (FALSE);

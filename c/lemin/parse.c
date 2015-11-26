@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/25 16:09:35 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/26 14:38:13 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,14 @@ int		parse_nbr(t_list **liste,t_map *map)
 
 int		parse_tube(t_list **liste,t_map *map)
 {
-	if (parse_noeud(liste, map) == TRUE)
+	if ((*liste) && parse_noeud(liste, map) == TRUE)
 	{
-		while (parse_noeud(liste, map) == TRUE)
+		if (*liste)
+		{
 			(*liste) = (*liste)->next;
+			while ((*liste) && parse_noeud(liste, map) == TRUE)
+				(*liste) = (*liste)->next;
+		}
 	}
 	else
 		return (FALSE);
@@ -63,14 +67,18 @@ int		parse_room(t_list **liste,t_map *map)
 
 int		parse_exp(t_list **liste,t_map *map)
 {
-	if (parse_nbr(liste, map) == FALSE)
+	if ((*liste) && parse_nbr(liste, map) == FALSE )
 		return (FALSE);
-	if (parse_room(liste, map) == TRUE)
+	if ((*liste) && parse_room(liste, map) == TRUE)
 	{
-		while (parse_room(liste, map) == TRUE)
+		if (*liste)
+		{
 			(*liste) = (*liste)->next;
+			while (parse_room(liste, map) == TRUE)
+				(*liste) = (*liste)->next;
+		}
 	}
-	if (parse_tube(liste, map) == FALSE)
+	if ((*liste) && parse_tube(liste, map) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }

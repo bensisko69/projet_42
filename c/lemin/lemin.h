@@ -6,23 +6,15 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/25 15:08:33 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/26 14:54:25 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* type dans la structure.
-** 1 type NBR
+/*
+** type dans la structure.
 ** 2 type ROOM
 ** 3 type start
 ** 4 type end
-** 6 type TUBE
-** start
-** 1 = 1er ellem
-** 0 = ellem suivant
-** room
-** 0 autre
-** 1 start
-** 2 end
 */
 
 #ifndef LEMIN_H
@@ -58,23 +50,37 @@ struct					s_map
 	t_list		*noeuds;
 };
 
-t_room					*struct_room(int type, t_list **liste);
-t_noeud					*struct_noeud(t_list **liste);
-
+/*
+**parse.c
+*/
 int						parse(t_list **liste, t_map *map);
 int						parse_exp(t_list **liste, t_map *map);
-int						parse_nbr(t_list **liste, t_map *map);
 int						parse_room(t_list **liste,t_map *map);
-int						parse_name_room(t_list **liste);
-int						parse_cmd(t_list **liste, t_map *map);
-int						parse_noeud(t_list **liste, t_map *map);
+int						parse_tube(t_list **liste,t_map *map);
+int						parse_nbr(t_list **liste, t_map *map);
 
-int						lexer(t_list **liste);
-int						check_name_room(t_list **liste);
+/*
+**parse2.c
+*/
+t_noeud					*struct_noeud(t_list **liste);
+int						parse_noeud(t_list **liste, t_map *map);
+t_room					*struct_room(int type, t_list **liste);
+t_room					*struct_cmd(int type, t_list **liste);
+int						parse_cmd(t_list **liste, t_map *map);
+int						parse_name_room(t_list **liste);
+
+/*
+**lexer.c
+*/
+int						lexer(t_map *map);
+int						check_name_room(t_map *map);
 int						check_noeud(t_list **liste);
 int						double_name(t_list **liste);
 int						check_name_noeud(t_list **liste);
 
+/*
+**Print.c
+*/
 void					print(t_map *map);
 
 #endif
