@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/26 14:44:22 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/26 17:35:42 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static char		*delete_tab_or_spaces(char *str)
 
 	a = 0;
 	i = 0;
-	while ((str[i] == ' ' || str[i] == '\t') && str[i])
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 		i++;
-	str2 = (char *)malloc(sizeof(char) * ((ft_strlen(str) - i) + 1));
+	str2 = (char*)malloc(sizeof(char) * ((ft_strlen(str) - i) + 1));
 	while (str[i])
 	{
 		str2[a] = str[i];
@@ -58,20 +58,27 @@ int				main(int ac, char **av)
 			}
 			if (line[0] != '\0')
 			{
-				if (str && str[0] == '#' && str[1] != '#' )
+				if (line && line[0] == '#' && line[1] != '#' )
 					continue;
 				ft_lstappend(&list, ft_lstnew(line, ft_strlen(line)));
 			}
 		}
 		if (line && line[0] == '\0')
+		{
+			free(str);
 			free(line);
+		}
 		if (list)
 		{
 			if (parse(&list, &map) == TRUE)
 			{
-				ft_putendl("GOOD JOB GUY!!!");
-				lexer(&map);
+				if (lexer(&map) == TRUE)
+					ft_putendl("GOOD JOB GUY!!!");
+				else
+					ft_putendl("DE LA MERDE LEXER");
 			}
+			else
+				ft_putendl("DE LA MERDE PARSE");
 			print(&map);
 		}
 	}

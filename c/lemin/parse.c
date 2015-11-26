@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/26 14:38:13 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/26 17:16:18 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int		parse_room(t_list **liste,t_map *map)
 		return (FALSE);
 	if (parse_name_room(liste) == TRUE)
 	{
-		ft_lstappend(&map->rooms, ft_lstnew(struct_room(2,liste), sizeof(t_room)));
+		ft_lstappend(&map->rooms, ft_lstnew(struct_room(2,liste),
+			sizeof(t_room)));
 		return (TRUE);
 	}
 	return (FALSE);

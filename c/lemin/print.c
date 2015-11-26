@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 14:44:14 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/26 14:39:16 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/26 17:38:27 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	print(t_map *map)
 	write(1, "\n", 1);
 	while (it != NULL)
 	{
-		ft_putstr(((t_room*)(it->content))->name);
-		write(1, " ", 1);
-		if (((t_room*)(it->content))->type_room != 3 && ((t_room*)(it->content))->type_room != 4)
+		ft_putstr(ft_strcat(((t_room*)(it->content))->name, " "));
+		if (((t_room*)(it->content))->type_room != 3
+			&& ((t_room*)(it->content))->type_room != 4)
 		{
 			ft_putnbr(((t_room*)(it->content))->x);
 			write(1, " ", 1);
@@ -35,8 +35,7 @@ void	print(t_map *map)
 	it = map->noeuds;
 	while (it != NULL)
 	{
-		ft_putstr(((t_noeud*)(it->content))->name_left);
-		write(1, " ", 1);
+		ft_putstr(ft_strcat(((t_noeud*)(it->content))->name_left, "-"));
 		ft_putendl(((t_noeud*)(it->content))->name_right);
 		it = it->next;
 	}

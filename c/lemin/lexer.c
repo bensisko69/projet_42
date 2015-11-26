@@ -6,25 +6,74 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 14:17:13 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/26 15:01:17 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/26 17:39:29 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-int		check_name_room(t_map *map)
+static int				check_left(char *name_left, t_list *room)
 {
-	t_list	*tmp;
 	t_list	*it;
 
-	it = map->rooms;
-	while (map)
+	it = room;
+	while (it)
 	{
-		tmp = map->rooms->next;
-		while (tmp->next)
+		if (ft_strcmp(((t_room*)(it->content))->name, name_left) == TRUE)
+			return (TRUE);
+		it = it->next;
+	}
+	return (FALSE);
+}
+
+static int				check_right(char *name_right, t_list *room)
+{
+	t_list	*it;
+
+	it = room;
+	while (it)
+	{
+		if (ft_strcmp(((t_room*)(it->content))->name, name_right) == TRUE)
+			return (TRUE);
+		it = it->next;
+	}
+	return (FALSE);
+}
+
+int						check_name_noeud(t_map *map)
+{
+	t_list *room;
+	t_list *noeud;
+
+	room = map->rooms;
+	noeud = map->noeuds;
+	while (noeud->next)
+	{
+		if (check_left(((t_noeud*)(noeud->content))->name_left, room)
+			== FALSE)
+			return (FALSE);
+		if (check_right(((t_noeud*)(noeud->content))->name_right, room)
+			== FALSE)
+			return (FALSE);
+		noeud = noeud->next;
+	}
+	return (TRUE);
+}
+
+int						check_name_room(t_list *rooms)
+{
+	t_list	*it;
+	t_list	*tmp;
+
+	it = rooms;
+	while (it->next)
+	{
+		tmp = it->next;
+		while(tmp)
 		{
-			if (ft_strcmp(((t_room*)(tmp->content))->name, ((t_room*)(it->content))->name) == TRUE)
-					return (FALSE);
+			if (ft_strcmp(((t_room*)(tmp->content))->name,
+				((t_room*)(it->content))->name) == TRUE)
+				return (FALSE);
 			tmp = tmp->next;
 		}
 		it = it->next;
@@ -32,82 +81,11 @@ int		check_name_room(t_map *map)
 	return (TRUE);
 }
 
-int		double_name(t_map *map)
-{
-	while ((*liste)->next->start != 1)
-	{
-		while ((*liste)->type == 5)
-			(*liste) = (*liste)->next;
-		if (ft_strcmp((*liste)->noeud.name_left, (*liste)->noeud.name_right)
-			== TRUE)
-			return (FALSE);
-		(*liste) = (*liste)->next;
-	}
-	return (TRUE);
-}
-
-int		check_noeud(t_liste **liste)
-{
-	t_liste	*tmp;
-	while ((*liste)->next->start != 1)
-	{
-		while ((*liste)->type == 5)
-			(*liste) = (*liste)->next;
-		tmp = (*liste)->next;
-		while (tmp->next->start != 1)
-		{
-			while (tmp->type == 5)
-				tmp = tmp->next;
-			if (ft_strcmp(tmp->str, (*liste)->str) == TRUE)
-			{
-				ft_error(4, (*liste)->str);
-				return (FALSE);
-			}
-			tmp = tmp->next;
-		}
-		(*liste) = (*liste)->next;
-	}
-	if (double_name(liste) == FALSE)
-		return (FALSE);
-	return (TRUE);
-}
-
-static int	check(char *str, t_liste *liste)
-{
-	while (liste->type == 2)
-	{
-		if (ft_strcmp(liste->room.name, str) == TRUE)
-			return (TRUE);
-		liste = liste->next;
-		while (liste->type == 5 || liste->type == 3 || liste->type == 4)
-			liste = liste->next;
-	}
-	return (FALSE);
-}
-
-int		check_name_noeud(t_liste **liste)
-{
-	t_liste *tmp;
-
-	tmp = (*liste);
-	while (tmp->type == 6)
-	{
-		if (check(tmp->noeud.name_left, (*liste)) == FALSE)
-			return (FALSE);
-		if (check(tmp->noeud.name_right, (*liste)) == FALSE)
-			return (FALSE);
-		tmp = tmp->next;
-	}
-	return (TRUE);
-}
-
 int		lexer(t_map *map)
 {
-	if (check_name_room(map) == FALSE)
+	if (check_name_room(map->rooms) == FALSE)
 		return (FALSE);
-	if (check_noeud(map) == FALSE)
-		return (FALSE);
-	if (check_name_noeud(liste) == FALSE)
+	if (check_name_noeud(map) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }

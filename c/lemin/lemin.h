@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/26 14:54:25 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/26 17:41:55 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define LEMIN_H
 # define FALSE 1
 # define TRUE 0
+
 # include <stdlib.h>
 # include <fcntl.h>
 # include "libft/includes/libft.h"
@@ -48,7 +49,7 @@ struct					s_map
 	int			nb_ants;
 	t_list		*rooms;
 	t_list		*noeuds;
-};
+}						;
 
 /*
 **parse.c
@@ -73,10 +74,13 @@ int						parse_name_room(t_list **liste);
 **lexer.c
 */
 int						lexer(t_map *map);
-int						check_name_room(t_map *map);
-int						check_noeud(t_list **liste);
-int						double_name(t_list **liste);
-int						check_name_noeud(t_list **liste);
+int						check_name_room(t_list *rooms);
+int						check_name_noeud(t_map *map);
+
+/*
+**lexer2.c
+*/
+
 
 /*
 **Print.c

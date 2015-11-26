@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 13:46:24 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/26 14:50:52 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/26 17:56:40 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,20 @@ int		parse_noeud(t_list **liste, t_map *map)
 	i = 0;
 	if ((*liste))
 	{
-		while (ft_isalnum(((char *)((*liste)->content))[i]) == 1 && ((char *)((*liste)->content))[i])
+		while (ft_isalnum(((char *)((*liste)->content))[i]) == 1 &&
+			((char *)((*liste)->content))[i])
 			i++;
-		if (((char *)((*liste)->content))[i] != ' ' && ((char *)((*liste)->content))[i] && ((char *)((*liste)->content))[i] == '-')
+		if (((char *)((*liste)->content))[i] != ' '
+			&& ((char *)((*liste)->content))[i]
+			&& ((char *)((*liste)->content))[i] == '-')
 			i++;
-		while (ft_isalnum(((char *)((*liste)->content))[i]) == 1 && ((char *)((*liste)->content))[i])
+		while (ft_isalnum(((char *)((*liste)->content))[i]) == 1
+			&& ((char *)((*liste)->content))[i])
 			i++;
 		if (((char *)((*liste)->content))[i] == '\0')
 		{
-			ft_lstappend(&map->noeuds, ft_lstnew(struct_noeud(liste), sizeof(t_noeud)));
+			ft_lstappend(&map->noeuds, ft_lstnew(struct_noeud(liste),
+				sizeof(t_noeud)));
 			return (TRUE);
 		}
 	}
@@ -80,22 +85,24 @@ int		parse_cmd(t_list **liste, t_map *map)
 	{
 		if (ft_strcmp((*liste)->content, "##start") == TRUE)
 		{
-			ft_lstappend(&map->rooms, ft_lstnew(struct_cmd(3, liste), sizeof(t_room)));
+			ft_lstappend(&map->rooms, ft_lstnew(struct_cmd(3, liste),
+				sizeof(t_room)));
 			(*liste) = (*liste)->next;
 			if (parse_name_room(liste) == FALSE)
 				return (FALSE);
-			ft_lstappend(&map->rooms, ft_lstnew(struct_room(2, liste), sizeof(t_room)));
+			ft_lstappend(&map->rooms, ft_lstnew(struct_room(2, liste),
+				sizeof(t_room)));
 		}
 		else if (ft_strcmp((*liste)->content, "##end") == TRUE)
 		{
-			ft_lstappend(&map->rooms, ft_lstnew(struct_cmd(4, liste), sizeof(t_room)));
+			ft_lstappend(&map->rooms, ft_lstnew(struct_cmd(4, liste),
+				sizeof(t_room)));
 			(*liste) = (*liste)->next;
 			if (parse_name_room(liste) == FALSE)
 				return (FALSE);
-			ft_lstappend(&map->rooms, ft_lstnew(struct_room(2, liste), sizeof(t_room)));
+			ft_lstappend(&map->rooms, ft_lstnew(struct_room(2, liste),
+				sizeof(t_room)));
 		}
-		else
-			return (FALSE);
 		(*liste) = (*liste)->next;
 		return (TRUE);
 	}
@@ -109,17 +116,24 @@ int		parse_name_room(t_list **liste)
 	i = 0;
 	if ((*liste))
 	{
-		if (((char *)((*liste)->content))[0] == 'L' || ((char *)((*liste)->content))[0] == '#')
+		if (((char *)((*liste)->content))[0] == 'L'
+			|| ((char *)((*liste)->content))[0] == '#')
 			return (FALSE);
-		while (ft_isalnum(((char *)((*liste)->content))[i]) == 1 && ((char *)((*liste)->content))[i])
+		while (ft_isalnum(((char *)((*liste)->content))[i]) == 1
+			&& ((char *)((*liste)->content))[i])
 			i++;
-		if (((char *)((*liste)->content))[i] == ' ' && ((char *)((*liste)->content))[i] && ((char *)((*liste)->content))[i] != '-')
+		if (((char *)((*liste)->content))[i] == ' '
+			&& ((char *)((*liste)->content))[i]
+			&& ((char *)((*liste)->content))[i] != '-')
 			i++;
-		while (ft_isdigit(((char *)((*liste)->content))[i]) == 1 && ((char *)((*liste)->content))[i])
+		while (ft_isdigit(((char *)((*liste)->content))[i]) == 1
+			&& ((char *)((*liste)->content))[i])
 			i++;
-		if (((char *)((*liste)->content))[i] == ' ' && ((char *)((*liste)->content))[i])
+		if (((char *)((*liste)->content))[i] == ' '
+			&& ((char *)((*liste)->content))[i])
 			i++;
-		while (ft_isdigit(((char *)((*liste)->content))[i]) == 1 && ((char *)((*liste)->content))[i])
+		while (ft_isdigit(((char *)((*liste)->content))[i]) == 1
+			&& ((char *)((*liste)->content))[i])
 			i++;
 		if (((char *)((*liste)->content))[i] == '\0')
 			return (TRUE);
