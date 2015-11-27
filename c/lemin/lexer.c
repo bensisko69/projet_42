@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 14:17:13 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/26 17:39:29 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/27 16:38:52 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int						check_name_room(t_list *rooms)
 	t_list	*tmp;
 
 	it = rooms;
-	while (it->next)
+	while (it)
 	{
 		tmp = it->next;
 		while(tmp)

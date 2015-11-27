@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 13:46:24 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/26 17:56:40 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/27 18:20:26 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,17 @@ t_noeud		*struct_noeud(t_list **liste)
 	tab = ft_strsplit((*liste)->content, '-');
 	noeud->name_left = ft_strdup(tab[0]);
 	noeud->name_right = ft_strdup(tab[1]);
-	ft_strdel(tab);
+	free_tab(tab);
 	return (noeud);
 }
 
 int		parse_noeud(t_list **liste, t_map *map)
 {
 	int	i;
+	t_noeud	*tmp;
 
 	i = 0;
+	tmp = NULL;
 	if ((*liste))
 	{
 		while (ft_isalnum(((char *)((*liste)->content))[i]) == 1 &&
@@ -44,8 +46,10 @@ int		parse_noeud(t_list **liste, t_map *map)
 			i++;
 		if (((char *)((*liste)->content))[i] == '\0')
 		{
-			ft_lstappend(&map->noeuds, ft_lstnew(struct_noeud(liste),
+			tmp = struct_noeud(liste);
+			ft_lstappend(&map->noeuds, ft_lstnew(tmp,
 				sizeof(t_noeud)));
+			free(tmp);
 			return (TRUE);
 		}
 	}
@@ -63,7 +67,7 @@ t_room		*struct_room(int type, t_list **liste)
 	room->x = ft_atoi(tab[1]);
 	room->y = ft_atoi(tab[2]);
 	room->type_room = type;
-	ft_strdel(tab);
+	free_tab(tab);
 	return (room);
 }
 
@@ -81,29 +85,39 @@ t_room		*struct_cmd(int type, t_list **liste)
 
 int		parse_cmd(t_list **liste, t_map *map)
 {
-	if ((*liste) && ft_strncmp((*liste)->content, "##", 2) == TRUE)
+	t_room		*tmp;
+
+	tmp = NULL;
+	if (liste && ft_strncmp((*liste)->content, "##", 2) == TRUE)
 	{
 		if (ft_strcmp((*liste)->content, "##start") == TRUE)
 		{
-			ft_lstappend(&map->rooms, ft_lstnew(struct_cmd(3, liste),
-				sizeof(t_room)));
-			(*liste) = (*liste)->next;
+			tmp = struct_cmd(3, liste);
+			ft_lstappend(&map->rooms, ft_lstnew(tmp, sizeof(t_room)));
+			*liste = (*liste)->next;
+			free(tmp);
 			if (parse_name_room(liste) == FALSE)
 				return (FALSE);
-			ft_lstappend(&map->rooms, ft_lstnew(struct_room(2, liste),
+			tmp = struct_room(2, liste);
+			ft_lstappend(&map->rooms, ft_lstnew(tmp,
 				sizeof(t_room)));
+			free(tmp);
 		}
 		else if (ft_strcmp((*liste)->content, "##end") == TRUE)
 		{
-			ft_lstappend(&map->rooms, ft_lstnew(struct_cmd(4, liste),
+			tmp = struct_cmd(4, liste);
+			ft_lstappend(&map->rooms, ft_lstnew(tmp,
 				sizeof(t_room)));
-			(*liste) = (*liste)->next;
+			*liste = (*liste)->next;
+			free(tmp);
 			if (parse_name_room(liste) == FALSE)
 				return (FALSE);
-			ft_lstappend(&map->rooms, ft_lstnew(struct_room(2, liste),
+			tmp = struct_room(2, liste);
+			ft_lstappend(&map->rooms, ft_lstnew(tmp,
 				sizeof(t_room)));
+			free(tmp);
 		}
-		(*liste) = (*liste)->next;
+		*liste = (*liste)->next;
 		return (TRUE);
 	}
 	return (2);
@@ -126,12 +140,16 @@ int		parse_name_room(t_list **liste)
 			&& ((char *)((*liste)->content))[i]
 			&& ((char *)((*liste)->content))[i] != '-')
 			i++;
+		else
+			return (FALSE);
 		while (ft_isdigit(((char *)((*liste)->content))[i]) == 1
 			&& ((char *)((*liste)->content))[i])
 			i++;
 		if (((char *)((*liste)->content))[i] == ' '
 			&& ((char *)((*liste)->content))[i])
 			i++;
+		else
+			return (FALSE);
 		while (ft_isdigit(((char *)((*liste)->content))[i]) == 1
 			&& ((char *)((*liste)->content))[i])
 			i++;

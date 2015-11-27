@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/26 17:41:55 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/27 17:49:37 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ struct					s_map
 /*
 **parse.c
 */
-int						parse(t_list **liste, t_map *map);
+int						parse(t_list *liste, t_map *map);
 int						parse_exp(t_list **liste, t_map *map);
 int						parse_room(t_list **liste,t_map *map);
 int						parse_tube(t_list **liste,t_map *map);
@@ -86,5 +86,15 @@ int						check_name_noeud(t_map *map);
 **Print.c
 */
 void					print(t_map *map);
+
+
+/*
+**free
+*/
+void					free_tab(char **tab);
+void					free_map(t_map *map);
+void					free_noeud(t_list *noeud);
+void					free_room(t_list *room);
+void					free_list(t_list *list);
 
 #endif

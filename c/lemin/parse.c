@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/26 17:16:18 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/27 18:29:08 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,16 @@ int		parse_tube(t_list **liste,t_map *map)
 
 int		parse_room(t_list **liste,t_map *map)
 {
+	t_room	*tmp;
+
+	tmp = NULL;
 	if (parse_cmd(liste, map) == FALSE)
 		return (FALSE);
 	if (parse_name_room(liste) == TRUE)
 	{
-		ft_lstappend(&map->rooms, ft_lstnew(struct_room(2,liste),
-			sizeof(t_room)));
+		tmp = struct_room(2,liste);
+		ft_lstappend(&map->rooms, ft_lstnew(tmp, sizeof(t_room)));
+		free(tmp);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -84,9 +88,12 @@ int		parse_exp(t_list **liste,t_map *map)
 	return (TRUE);
 }
 
-int		parse(t_list **liste,t_map *map)
+int		parse(t_list *liste,t_map *map)
 {
-	if (parse_exp(liste, map) ==  FALSE)
+	t_list	*it;
+
+	it = liste;
+	if (parse_exp(&it, map) ==  FALSE)
 		return (FALSE);
 	return (TRUE);
 }

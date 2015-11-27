@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/02 13:37:47 by lrenoud-          #+#    #+#             */
-/*   Updated: 2014/09/19 11:59:37 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/11/27 16:11:44 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 static int	ft_neg(char *buff, char *temp, int n)
 {
 	free(buff);
-	if (temp)
-		free(temp);
+	free(temp);
 	return (n);
 }
 
