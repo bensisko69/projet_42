@@ -6,13 +6,13 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/12/04 11:33:15 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/12/04 13:43:51 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static char		*delete_tab_or_spaces(char *str)
+char			*delete_tab_or_spaces(char *str)
 {
 	int		i;
 	int		a;
@@ -31,69 +31,6 @@ static char		*delete_tab_or_spaces(char *str)
 	}
 	str2[a] = '\0';
 	return (str2);
-}
-
-void			free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-void			free_list(t_list *list)
-{
-	t_list	*it;
-
-	while (list)
-	{
-		it = list;
-		free(it->content);
-		list = list->next;
-		free(it);
-	}
-}
-
-void			free_room(t_list *room)
-{
-	t_list	*it;
-
-	it = room;
-	while (room)
-	{
-		it = room;
-		free(((t_room*)(it->content))->name);
-		room = room->next;
-		free(it->content);
-		free(it);
-	}
-}
-
-void			free_noeud(t_list *noeud)
-{
-	t_list	*it;
-
-	it = noeud;
-	while (noeud)
-	{
-		it = noeud;
-		free(((t_noeud*)(it->content))->name_left);
-		free(((t_noeud*)(it->content))->name_right);
-		noeud = noeud->next;
-		free(it->content);
-		free(it);
-	}
-}
-
-void			free_map(t_map *map)
-{
-	free_room(map->rooms);
-	free_noeud(map->noeuds);
 }
 
 int				main(int ac, char **av)
@@ -131,15 +68,8 @@ int				main(int ac, char **av)
 		if (list)
 		{
 			if (parse(list, &map) == TRUE)
-			{
 				if (lexer(&map, &list) == TRUE)
-					ft_putendl("GOOD JOB GUY!!!");
-				else
-					ft_putendl("DE LA MERDE LEXER");
-			}
-			else
-				ft_putendl("DE LA MERDE PARSE");
-			print(&map);
+					print(&map);
 		}
 
 		free_list(list);

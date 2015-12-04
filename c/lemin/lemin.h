@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/12/04 11:42:37 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/12/04 13:34:23 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ struct					s_map
 }						;
 
 /*
+**lemin.c
+*/
+char					*delete_tab_or_spaces(char *str);
+
+/*
 **parse.c
 */
 int						parse(t_list *liste, t_map *map);
@@ -68,7 +73,7 @@ int						parse_noeud(t_list **liste, t_map *map);
 t_room					*struct_room(int type, t_list **liste);
 t_room					*struct_cmd(int type, t_list **liste);
 int						parse_cmd(t_list **liste, t_map *map);
-int						parse_name_room(t_list **liste);
+int						parse_name_room(t_list **liste, t_map *map);
 
 /*
 **lexer.c
@@ -90,7 +95,7 @@ void					print(t_map *map);
 
 
 /*
-**free
+**free.c
 */
 void					free_tab(char **tab);
 void					free_map(t_map *map);

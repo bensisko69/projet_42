@@ -6,7 +6,7 @@
 #    By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/27 14:37:53 by lrenoud-          #+#    #+#              #
-#    Updated: 2015/11/26 14:44:01 by lrenoud-         ###   ########.fr        #
+#    Updated: 2015/12/04 13:32:17 by lrenoud-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC = lemin.c\
 	  parse2.c\
 	  print.c\
 	  lexer.c\
+	  free.c\
 
 OBJ = $(SRC:.c=.o)
 

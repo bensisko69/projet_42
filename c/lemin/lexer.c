@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 14:17:13 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/12/04 12:08:09 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/12/04 13:48:11 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,17 @@ int		check_cmd(t_list *rooms)
 	while (it)
 	{
 		if (ft_strcmp(((t_room*)(it->content))->name, "##start") == TRUE)
+		{
+			if (it->next && ((t_room*)(it->next->content))->type_room != 2)
+				return (FALSE)
 			start++;
+		}
 		else if (ft_strcmp(((t_room*)(it->content))->name, "##end") == TRUE)
+		{
+			if (it->next && ((t_room*)(it->next->content))->type_room != 2)
+				return (FALSE);
 			end++;
+		}
 		it = it->next;
 	}
 	if (start == 1 && end == 1)

@@ -6,9 +6,18 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 13:46:24 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/12/04 12:06:11 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/12/04 13:37:51 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+** GRAMM:
+** exp			:=	[comment]* NBR [room]+ [tube]+ [comment]*
+** room			:=	[comment]* [commande]? WORD NBR{2}
+** tube			:=	[comment]* NBR - NBR
+** commande		:=	DIEZE DIEZE [WORD]*
+** comment		:=	DIEZE [WORD]*
+*/
 
 #include "lemin.h"
 
@@ -31,7 +40,6 @@ int		parse_noeud(t_list **liste, t_map *map)
 	t_noeud	*tmp;
 
 	i = 0;
-	tmp = NULL;
 	if ((*liste))
 	{
 		while (ft_isalnum(((char *)((*liste)->content))[i]) == 1 &&
@@ -47,8 +55,7 @@ int		parse_noeud(t_list **liste, t_map *map)
 		if (((char *)((*liste)->content))[i] == '\0')
 		{
 			tmp = struct_noeud(liste);
-			ft_lstappend(&map->noeuds, ft_lstnew(tmp,
-				sizeof(t_noeud)));
+			ft_lstappend(&map->noeuds, ft_lstnew(tmp, sizeof(t_noeud)));
 			free(tmp);
 			return (TRUE);
 		}
@@ -96,12 +103,6 @@ int		parse_cmd(t_list **liste, t_map *map)
 			ft_lstappend(&map->rooms, ft_lstnew(tmp, sizeof(t_room)));
 			*liste = (*liste)->next;
 			free(tmp);
-			if (parse_name_room(liste) == FALSE)
-				return (FALSE);
-			tmp = struct_room(2, liste);
-			ft_lstappend(&map->rooms, ft_lstnew(tmp,
-				sizeof(t_room)));
-			free(tmp);
 		}
 		else if (ft_strcmp((*liste)->content, "##end") == TRUE)
 		{
@@ -110,25 +111,21 @@ int		parse_cmd(t_list **liste, t_map *map)
 				sizeof(t_room)));
 			*liste = (*liste)->next;
 			free(tmp);
-			if (parse_name_room(liste) == FALSE)
-				return (FALSE);
-			tmp = struct_room(2, liste);
-			ft_lstappend(&map->rooms, ft_lstnew(tmp,
-				sizeof(t_room)));
-			free(tmp);
 		}
 		return (TRUE);
 	}
 	return (2);
 }
 
-int		parse_name_room(t_list **liste)
+int		parse_name_room(t_list **liste, t_map *map)
 {
 	int	i;
 
 	i = 0;
 	if ((*liste))
 	{
+		if (parse_cmd(liste, map) == FALSE)
+			return (FALSE);
 		if (((char *)((*liste)->content))[0] == 'L'
 			|| ((char *)((*liste)->content))[0] == '#')
 			return (FALSE);

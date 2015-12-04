@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/12/04 12:04:09 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/12/04 13:15:13 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,31 +58,22 @@ int		parse_room(t_list **liste,t_map *map)
 	t_room	*tmp;
 
 	tmp = NULL;
-	if (parse_cmd(liste, map) == TRUE)
-		return (TRUE);
-	else if (parse_name_room(liste) == TRUE)
+	while (parse_name_room(liste, map) == TRUE)
 	{
 		tmp = struct_room(2,liste);
 		ft_lstappend(&map->rooms, ft_lstnew(tmp, sizeof(t_room)));
 		free(tmp);
-		return (TRUE);
+		(*liste) = (*liste)->next;
 	}
-	return (FALSE);
+	return (TRUE);
 }
 
 int		parse_exp(t_list **liste,t_map *map)
 {
 	if ((*liste) && parse_nbr(liste, map) == FALSE )
 		return (FALSE);
-	if ((*liste) && parse_room(liste, map) == TRUE)
-	{
-		(*liste) = (*liste)->next;
-		if (*liste)
-		{
-			while (parse_room(liste, map) == TRUE)
-				(*liste) = (*liste)->next;
-		}
-	}
+	if ((*liste) && parse_room(liste, map) == FALSE)
+		return (FALSE);
 	if ((*liste) && parse_tube(liste, map) == FALSE)
 		return (FALSE);
 	return (TRUE);
