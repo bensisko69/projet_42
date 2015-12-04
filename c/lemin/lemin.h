@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/27 17:49:37 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/12/04 11:42:37 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ int						parse_name_room(t_list **liste);
 /*
 **lexer.c
 */
-int						lexer(t_map *map);
+int						lexer(t_map *map, t_list **list);
 int						check_name_room(t_list *rooms);
 int						check_name_noeud(t_map *map);
+int						check_cmd(t_list *rooms);
 
 /*
 **lexer2.c

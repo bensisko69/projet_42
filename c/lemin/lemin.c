@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/27 18:22:23 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/12/04 11:33:15 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int				main(int ac, char **av)
 		{
 			if (parse(list, &map) == TRUE)
 			{
-				if (lexer(&map) == TRUE)
+				if (lexer(&map, &list) == TRUE)
 					ft_putendl("GOOD JOB GUY!!!");
 				else
 					ft_putendl("DE LA MERDE LEXER");

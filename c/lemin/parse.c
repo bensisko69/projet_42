@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 16:00:45 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/27 18:29:08 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/12/04 12:04:09 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int		parse_room(t_list **liste,t_map *map)
 	t_room	*tmp;
 
 	tmp = NULL;
-	if (parse_cmd(liste, map) == FALSE)
-		return (FALSE);
-	if (parse_name_room(liste) == TRUE)
+	if (parse_cmd(liste, map) == TRUE)
+		return (TRUE);
+	else if (parse_name_room(liste) == TRUE)
 	{
 		tmp = struct_room(2,liste);
 		ft_lstappend(&map->rooms, ft_lstnew(tmp, sizeof(t_room)));
@@ -76,9 +76,9 @@ int		parse_exp(t_list **liste,t_map *map)
 		return (FALSE);
 	if ((*liste) && parse_room(liste, map) == TRUE)
 	{
+		(*liste) = (*liste)->next;
 		if (*liste)
 		{
-			(*liste) = (*liste)->next;
 			while (parse_room(liste, map) == TRUE)
 				(*liste) = (*liste)->next;
 		}

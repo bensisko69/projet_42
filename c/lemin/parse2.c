@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 13:46:24 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/27 18:20:26 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/12/04 12:06:11 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int		parse_cmd(t_list **liste, t_map *map)
 	t_room		*tmp;
 
 	tmp = NULL;
-	if (liste && ft_strncmp((*liste)->content, "##", 2) == TRUE)
+	if ((*liste) && ft_strncmp((*liste)->content, "##", 2) == TRUE)
 	{
 		if (ft_strcmp((*liste)->content, "##start") == TRUE)
 		{
@@ -117,7 +117,6 @@ int		parse_cmd(t_list **liste, t_map *map)
 				sizeof(t_room)));
 			free(tmp);
 		}
-		*liste = (*liste)->next;
 		return (TRUE);
 	}
 	return (2);

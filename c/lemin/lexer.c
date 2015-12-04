@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 14:17:13 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/11/27 16:38:52 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/12/04 12:08:09 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,21 @@ int						check_name_noeud(t_map *map)
 
 	room = map->rooms;
 	noeud = map->noeuds;
-	while (noeud->next)
+	if (noeud && room)
 	{
-		if (check_left(((t_noeud*)(noeud->content))->name_left, room)
-			== FALSE)
-			return (FALSE);
-		if (check_right(((t_noeud*)(noeud->content))->name_right, room)
-			== FALSE)
-			return (FALSE);
-		noeud = noeud->next;
+		while (noeud->next)
+		{
+			if (check_left(((t_noeud*)(noeud->content))->name_left, room)
+				== FALSE)
+				return (FALSE);
+			if (check_right(((t_noeud*)(noeud->content))->name_right, room)
+				== FALSE)
+				return (FALSE);
+			noeud = noeud->next;
+		}
+		return (TRUE);
 	}
-	return (TRUE);
+	return (FALSE);
 }
 
 int						check_name_room(t_list *rooms)
@@ -81,8 +85,37 @@ int						check_name_room(t_list *rooms)
 	return (TRUE);
 }
 
-int		lexer(t_map *map)
+int		check_cmd(t_list *rooms)
 {
+	t_list	*it;
+	int		start;
+	int		end;
+
+	start = 0;
+	end = 0;
+	it = rooms;
+	while (it)
+	{
+		if (ft_strcmp(((t_room*)(it->content))->name, "##start") == TRUE)
+			start++;
+		else if (ft_strcmp(((t_room*)(it->content))->name, "##end") == TRUE)
+			end++;
+		it = it->next;
+	}
+	if (start == 1 && end == 1)
+		return (TRUE);
+	return (FALSE);
+}
+
+int		lexer(t_map *map, t_list **list)
+{
+	if (check_cmd(map->rooms) == FALSE)
+	{
+		free_map(map);
+		free_list((*list));
+		ft_putendl_fd("ERROR", 2);
+		exit (FALSE);
+	}
 	if (check_name_room(map->rooms) == FALSE)
 		return (FALSE);
 	if (check_name_noeud(map) == FALSE)
