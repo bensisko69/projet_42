@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/12/04 13:34:23 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/12/04 15:46:24 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@
 typedef struct s_map	t_map;
 typedef struct s_room	t_room;
 typedef struct s_noeud	t_noeud;
+typedef struct s_lab	t_lab;
+
+struct					s_lab
+{
+	char				*name;
+}						;
 
 struct					s_noeud
 {
@@ -42,6 +48,7 @@ struct					s_room
 	char				*name;
 	int					x;
 	int					y;
+	t_list				*lab;
 }						;
 
 struct					s_map
@@ -84,11 +91,6 @@ int						check_name_noeud(t_map *map);
 int						check_cmd(t_list *rooms);
 
 /*
-**lexer2.c
-*/
-
-
-/*
 **Print.c
 */
 void					print(t_map *map);
@@ -102,5 +104,12 @@ void					free_map(t_map *map);
 void					free_noeud(t_list *noeud);
 void					free_room(t_list *room);
 void					free_list(t_list *list);
+
+/*
+**labyrinth.c
+*/
+void					labyrinth(t_map *map);
+void					created_lab(t_list *noeuds, t_list *rooms);
+t_lab					*struct_lab(char *str);
 
 #endif

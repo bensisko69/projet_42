@@ -6,7 +6,7 @@
 #    By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/27 14:37:53 by lrenoud-          #+#    #+#              #
-#    Updated: 2015/12/04 13:32:17 by lrenoud-         ###   ########.fr        #
+#    Updated: 2015/12/04 14:25:29 by lrenoud-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC = lemin.c\
 	  print.c\
 	  lexer.c\
 	  free.c\
+	  labyrinth.c\
 
 OBJ = $(SRC:.c=.o)
 

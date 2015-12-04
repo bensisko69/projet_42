@@ -6,7 +6,7 @@
 /*   By: lrenoud- <lrenoud-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 15:02:49 by lrenoud-          #+#    #+#             */
-/*   Updated: 2015/12/04 13:43:51 by lrenoud-         ###   ########.fr       */
+/*   Updated: 2015/12/04 15:45:04 by lrenoud-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,12 @@ int				main(int ac, char **av)
 		if (list)
 		{
 			if (parse(list, &map) == TRUE)
-				if (lexer(&map, &list) == TRUE)
-					print(&map);
+				if (lexer(&map, &list) == FALSE)
+					return (FALSE);
+			free_list(list);
 		}
-
-		free_list(list);
+		labyrinth(&map);
+		// print(&map);
 		free_map(&map);
 	}
 	return (FALSE);
